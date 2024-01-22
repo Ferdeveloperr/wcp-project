@@ -5,54 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif&display=swap" rel="stylesheet">
     <title>Home</title>
 </head>
 
 <body>
 
     <!-- LANDING PAGE -->
-    <header>
-        <img src="./image/logoPruebaa.png" alt="">
-        <div>
-            <h1>
-                <a href="./pages/signUp.html" class="btn btn-primary">Crear cuenta</a>
-            </h1>
-        </div>
+    <div class="containerTop">
+        <p>WorldPlus+</p>
+    </div>
+
+    <header class="container">
+
+        <img src="./image/logoPruebaa.png" alt="logo">
+
     </header>
 
-    <!-- H O M E  -->
+
+
+    <!-- SECTION CREAR CUENTA -->
 
     <section>
-        <div>
-            <p>Ingresa y genera rendimientos semanales </p>
+
+        <div class="mainButton">
+            <h1 class="d-flex justify-content-center">
+                <div class="d-grid gap-2">
+                    <a href="./pages/signUp.html" class="btn btn-dark btn-lg custom-btn-width">Crear cuenta</a>
+                </div>
+            </h1>
+        </div>
+
+        <!-- Texto main debajo de btn CREAR CUENTA -->
+        <div class="mainText">
+            <p class="mainP">Ingresa y genera rendimientos semanales! </p>
         </div>
     </section>
 
+
+    <!-- ZONA DE USUARIOS -->
+
+
     <section>
-        <h2>Usuarios</h2>
-        <form action="">
-            <label for="email">Correo electronico</label>
-            <input type="email" name="email" placeholder="Ingrese su correo electronico" id="email">
 
-            <label for="password">contraseña</label>
-            <input type="password" name="password" placeholder="Ingrese su contraseña" id="password">
+        <h3 class="userZone">Usuarios</h3>
+        <form action="POST">
 
-            <a href="./pages/userArea.html" class="btn btn-primary">ingresar</a>
+            <div class="form-floating mb-3">
+                <label for="floatingInput">Correo electronico</label>
+                <input type="email" class="form-control" id="floatingInput"
+                    placeholder="Ingrese su direccion de correo electronico">
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            </div>
+
         </form>
-    </section>
 
-    <section>
+        <!-- Boton de ingresar a User Area -->
 
-        <input type="checkbox">
-        <a href="#" class="btn btn-primary">Recordarme</a>
-
-
-        <a href="./pages/forgotPassword.html" class="btn btn-primary">Olvidaste tu contraseña</a>
+        <div class="buttonFormMain">
+            <a href="./pages/userArea.html" class="btn btn-dark btn-lg">ingresar</a>
+        </div>
 
     </section>
 
-    <!-- BOOTSTRAP ESTILOS  -->
 
+    <!-- OPCIONES ADICIONALES -->
+
+
+
+    <section class="button-section">
+        <label class="checkbox-label">
+            <input type="checkbox"> Recordarme
+        </label>
+
+        <a href="./pages/forgotPassword.html" class="btn btn-dark btn-lg">Olvidaste tu contraseña</a>
+    </section>
 
 
 
