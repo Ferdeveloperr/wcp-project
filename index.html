@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Home</title>
+</head>
+
+<body>
+
+    <!-- LANDING PAGE -->
+    <div class="containerTop">
+        <p>WorldPlus</p>
+    </div>
+
+    <header class="container">
+
+        <img src="./image/logoPruebaa.png" alt="logo">
+
+    </header>
+
+
+
+    <!-- SECTION CREAR CUENTA -->
+
+    <section>
+
+        <div class="mainButton">
+            <h1 class="d-flex justify-content-center">
+                <div class="d-grid gap-2">
+                    <a href="./pages/signUp.html" class="btn btn-dark btn-lg custom-btn-width">Crear cuenta</a>
+                </div>
+            </h1>
+        </div>
+
+        <!-- Texto main debajo de btn CREAR CUENTA -->
+        <div class="mainText">
+            <p class="mainP">Registrate y obtene tus 10 monedas extra! </p>
+        </div>
+    </section>
+
+
+    <!-- ZONA DE USUARIOS -->
+
+
+    <section>
+
+        <h3 class="userZone">Usuarios</h3>
+        <form action="POST">
+
+            <div class="form-floating mb-3 text-center">
+                <label for="floatingInput"><b>Correo electronico</b></label>
+                <input type="email" class="form-control" id="floatingInput"
+                    placeholder="Ingrese su direccion de correo electronico">
+            </div>
+
+
+            <div class="form-floating mb-3 text-center">
+                <label for="floatingPassword"><b>Contraseña</b></label>
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Ingrese su contraseña">
+            </div>
+
+        </form>
+
+        <!-- Boton de ingresar a User Area -->
+
+        <div class="buttonFormMain">
+            <a href="./pages/userArea.html" class="btn btn-dark btn-lg">ingresar</a>
+        </div>
+
+    </section>
+
+
+
+
+
+    <!-- OPCIONES ADICIONALES -->
+
+
+
+    <section class="button-section">
+        <label class="checkbox-label-index">
+            <input type="checkbox"> Recordarme
+        </label>
+
+        <a href="./pages/forgotPassword.html" class="btn btn-dark btn-lg">Olvidaste tu contraseña</a>
+    </section>
+
+
+
+</body>
+
+</html>
