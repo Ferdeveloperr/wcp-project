@@ -7,21 +7,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Roboto+Mono&family=Rubik&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Libre+Franklin&family=Noto+Serif&family=Roboto+Mono&family=Rubik&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Pagina principal</title>
 </head>
 
 <body>
 
     <!-- U S E R  A R E A -->
-    <header>
+    <header class="userHeader">
 
         <!-- Agregamos el nav -->
-        <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a href="../index.html" class="Logo">
                     <img src="../image/logoPruebaa.png" alt="Logo" height="30px" width="30px">
                 </a>
-                <a class="navbar-brand" href="#">WorldCoinPlus</a>
+                <div class="logoStyle"><a class="navbar-brand" href="./userArea.html">WorldPlus</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -32,16 +41,16 @@
                             <a class="nav-link active" aria-current="page" href="index.html"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Terminos y condiciones</a>
+                            <a class="nav-link" href="terms.html" target="_blank">Terminos y condiciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Recuperar contraseña</a>
+                            <a class="nav-link" href="../pages/forgotPassword.html">Recuperar contraseña</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../index.html">Cerrar sesion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pie de pagina</a>
+                            <a class="nav-link" href="#footerSection">Pie de pagina</a>
                         </li>
                     </ul>
                 </div>
@@ -51,62 +60,211 @@
     </header>
 
 
-    <section>
+    <!-- SECCION DE TITULO Y SUBTITLO -->
 
+
+    <section class="titleSection">
+        <br><br>
         <div>
             <h1>
                 Bienvenido!
             </h1>
         </div>
 
-        <div>
-            <h3>
-                Nombre de usuario
-            </h3>
-            <video src="../image/Alejo y Valentina   Carlitox   Hola vengo a flotar.mp4" controls width="700"></video>
+
+    </section>
+
+    <div>
+        <video src="../image/Alejo y Valentina   Carlitox   Hola vengo a flotar.mp4" controls width="300"></video>
+    </div>
+
+    <!-- Linea divisoria -->
+    <hr class="custom-hr">
+
+
+    <section>
+        <h4 class="tittleUserArea">Ingrese la cantidad de monedas que utilizara</h4>
+        <div class="form-floating mb-3 d-flex flex-column align-items-center">
+            <label for="floatingNumberr"></label>
+            <input type="number" class="form-control" id="floatingNumberr"
+                placeholder="Ingrese la dirección de su wallet">
+        </div>
+
+        <!-- Button trigger modal -->
+        <div class="text-center">
+            <button type="button" class="btn btn-success btn-lg mt-2 w-100" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                OK
+            </button>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Operacion.</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="copiarLinkBtn">Copiar
+                            link</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>
+
+    <br><br><br><br><br><br><br><br>
 
     <section>
 
         <br>
-
-        <h4>Ingrese la cantidad de monedas que utilizara</h4>
-        <div class="form-floating mb-3">
+        <h4 class="tittleUserArea">Ingrese la confirmacion de orden</h4>
+        <div class="form-floating mb-3 d-flex flex-column align-items-center">
             <label for="floatingNumberr"></label>
             <input type="number" class="form-control" id="floatingNumberr"
-                placeholder="Ingrese la cantidad de monedas a ingresar">
-            <button type="submit">ok</button>
+                placeholder="Ingrese la dirección de su wallet">
         </div>
+        <button class="btn btn-success btn-lg mt-2 w-100 text-center" onclick="startTimer()">Ok</button>
 
-
-        <h4>Ingrese la confirmacion de orden</h4>
-        <div class="form-floating mb-3">
-            <label for="floatingNumberr"></label>
-            <input type="number" class="form-control" id="floatingNumberr"
-                placeholder="Ingrese la cantidad de monedas a ingresar">
-            <button type="submit">ok</button>
-        </div>
 
 
     </section>
 
+    <!-- SECCION DE TIMER -->
 
+    <section class="timerStyle">
+        <div class="timerAcreditacion">
+            <h3>
+                Timer de acreditacion
+            </h3>
+        </div>
+        <div class="timer-container">
+            <div id="timer" class="countdown"></div>
+        </div>
+
+        <script src="../script.js"></script>
+
+    </section>
+
+
+    <h4 class="tittleUserArea">Ingrese su wallet</h4>
+    <div class="form-floating mb-3 d-flex flex-column align-items-center">
+        <label for="floatingNumberr"></label>
+        <input type="number" class="form-control" id="floatingNumberr" placeholder="Ingrese la dirección de su wallet">
+
+    </div>
+    <button type="submit" href="#" class="btn btn-success btn-lg mt-2 w-100 text-center"
+        onclick="return exito()">Ok</button>
+
+
+    <hr class="custom-hr">
+
+
+    <!-- SECCION DE COTIZACIONES DE CRYPTO -->
+
+
+
+
+    <div>
+        <h3 class="TextCotizacion">Cotizacion cripto</h3>
+    </div>
+
+
+    <section class="sectionCrypto">
+
+        <div class="containerCrypto">
+            <div class="coin-price">
+
+                <div class="log"><img src="../image/logoBitcoinDos.png" alt=""></div>
+                <div>
+                    <h1> $<span id="bitcoin"></span></h1>
+                    <h1>Bitcoin</h1>
+                </div>
+
+                <div class="coin-price">
+                    <div class="log"><img src="../image/Ethereum-Logo.wine.png" alt=""></div>
+                    <div>
+                        <h1> $<span id="ethereum"></span></h1>
+                        <h1>Ethereum</h1>
+                    </div>
+
+                    <div class="coin-price">
+                        <div class="img-responsive"><img src="../image/logoWorldcoinApi.png" alt=""></div>
+                        <div>
+                            <h1> $<span id="worldcoin"></span></h1>
+                            <h1>Worldcoin</h1>
+                        </div>
+
+                    </div>
+
+                </div>
+
+    </section>
+
+
+
+
+
+
+
+    <!-- SECCION DE VIDEO TUTORIAL -->
+    <hr class="custom-hr">
+
+
+    <section class="titleSection">
+        <h2>
+            Tutorial para cambiar tus criptomonedas
+        </h2>
+        <h4>
+            Siga los pasos que se muestran a continuacion!
+        </h4>
+
+        <video src="../image/Alejo y Valentina   Carlitox   Hola vengo a flotar.mp4" controls width="300"></video>
+    </section>
+
+
+    <hr class="custom-hr">
     <!-- F O O T E R -->
 
-
-    <footer>
-        <!-- <p>Pie de Pagina</p> -->
-    </footer>
-
+    <section id="footerSection">
+        <footer class="bg-black text-white py-4 mt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p><a href="terms.html" target="_blank" class="text-white">Términos y Condiciones</a></p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p>Derechos Reservados &copy; 2024 WorldPlus</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><a href="https://wa.me/tunumero" class="text-white" target="_blank">Área de Soporte
+                            </a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../copiarlink.js"></script>
+    <script src="../crypto.js"></script>
+    <script src="../sweetalert.js"></script>
+
 
 </body>
 

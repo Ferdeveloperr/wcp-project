@@ -42,6 +42,10 @@ h1 {
     margin: 0;
 }
 
+.logoStyle {
+    margin-left: 5px;
+}
+
 
 
 /* ESTILOS SECTION CREAR CUENTA */
@@ -72,6 +76,7 @@ h1 {
 
 
 .mainText {
+    font-family: 'Roboto Mono', monospace;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -80,7 +85,7 @@ h1 {
     height: 150px;
     margin-top: 40px;
     color: #fff;
-    font-weight: 600;
+    font-weight: 800;
 }
 
 
@@ -125,9 +130,14 @@ h1 {
     align-items: center;
 }
 
+.checkbox-label-index {
+    margin-bottom: 150px;
+}
+
 
 input[type="checkbox"] {
     margin-right: 5px;
+
 }
 
 
@@ -138,6 +148,223 @@ input[type="checkbox"] {
 
 /* REGISTRO DE USUARIOS */
 
+.tituloRegistro {
+    margin-bottom: 55px;
+}
+
+.containerRegistro {
+    text-align: center;
+}
+
 .back-link {
     margin-bottom: 20px;
+}
+
+.form-control {
+    background-color: black;
+}
+
+
+/* ESTILOS DEL USER AREA HEADER */
+
+.userHeader {
+    background-color: black;
+}
+
+
+/* Estilos de titulo */
+
+.titleSection {
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+
+}
+
+.titleSection>div {
+    margin-bottom: 40px;
+}
+
+
+video {
+    margin-left: 10%;
+    width: 80%;
+    height: 300px;
+    margin-top: 20px;
+}
+
+.tittleUserArea {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Noto Serif', serif;
+}
+
+.TextCotizacion {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    margin-top: 300px;
+    font-size: 60px;
+    background: whitesmoke;
+    color: black;
+    border-radius: 35px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+
+
+/* Estilos timer */
+
+.timerStyle {
+    font-family: 'Arial', sans-serif;
+    margin-top: 90px;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+    background-color: #fff;
+    color: #000;
+}
+
+.timerAcreditacion {
+
+    justify-content: center;
+    text-align: center;
+
+
+}
+
+
+.timer-container {
+    text-align: center;
+}
+
+
+.countdown {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Estilos hr */
+
+.custom-hr {
+    height: 3px;
+    /* Ajusta el grosor de la línea aquí */
+    background-color: black;
+    /* Puedes cambiar el color aquí */
+    border: none;
+    border-radius: 5px;
+    /* Bordes redondeados */
+    width: 90%;
+    /* Ocupa el 90% de la pantalla */
+    margin: 60px auto;
+
+}
+
+
+.sectionCrypto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.containerCrypto {
+    background: #ccc;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    width: 90%;
+
+}
+
+.containerCrypto .coin-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+
+}
+
+.containerCrypto .coin-prive .log {
+    width: 70px;
+    margin-right: 10px;
+}
+
+.containerCrypto .coin-price div {
+    display: flex;
+}
+
+.log img {
+    max-width: 60px;
+    /* Puedes ajustar el tamaño máximo del logo según tus preferencias */
+    margin-right: 2px;
+
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+
+@media (max-width: 768px) {
+    .containerCrypto {
+        flex-direction: column;
+        /* Cambia la dirección de flexión a columna en pantallas más pequeñas */
+        align-items: stretch;
+        /* Asegura que los elementos se estiren para llenar el contenedor */
+    }
+
+    .containerCrypto .coin-price {
+        flex-direction: column;
+        text-align: center;
+        /* Centra el texto cuando está en columna */
+        padding: 5px;
+    }
+
+    .containerCrypto .coin-price .log {
+        margin-right: 0;
+        /* Elimina el margen derecho cuando está en columna */
+        margin-bottom: 10px;
+        /* Añade margen inferior para separar el logo del texto */
+    }
+
+    .log img {
+        max-width: 90%;
+        margin-right: 0;
+    }
+
+    .img-responsive {
+        max-width: 50%;
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 5px;
+    }
+
+    .TextCotizacion {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin-top: 300px;
+        font-size: 60px;
+        background: whitesmoke;
+        color: black;
+        border-radius: 35px;
+        width: 80%;
+        margin-left: 10%;
+        margin-bottom: 50px;
+    }
 }
