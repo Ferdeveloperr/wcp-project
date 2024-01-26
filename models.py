@@ -16,7 +16,8 @@ class Users(Base):
     user_level = Column(Integer, default=10)
     created_on = Column(DateTime(timezone=True), default=func.now())
     
-    user = relationship('Wallets', back_populates='wallet')
+    # user = relationship('Wallets', back_populates='wallet')
+    wallets = relationship('Wallets', back_populates='owner')
     
 class Wallets(Base):
     __tablename__ = 'wallets'
@@ -29,8 +30,9 @@ class Wallets(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     created_on = Column(DateTime(timezone=True), default=func.now())
     
-    wallet = relationship('Users', back_populates='user')
-    wallet_transaction = relationship('Transactions', back_populates='transaction')
+    # wallet = relationship('Users', back_populates='user')
+    # wallet_transaction = relationship('Transactions', back_populates='transaction')
+    owner = relationship('Users', back_populates='wallets')
     
 class Transactions(Base):
     __tablename__ = 'transactions'
@@ -47,4 +49,4 @@ class Transactions(Base):
     direction = Column(String)
     created_on = Column(DateTime(timezone=True), default=func.now())
     
-    transaction = relationship('Wallets', back_populates='wallet_transaction')
+    # transaction = relationship('Wallets', back_populates='wallet_transaction')

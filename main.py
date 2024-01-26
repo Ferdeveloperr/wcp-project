@@ -65,10 +65,9 @@ def login_for_access_token(response: Response, form_data: OAuth2PasswordRequestF
 def home(token: Annotated[str, Depends(oauth2_scheme)]):
     return refreshJWT(token)
     
-@app.get("/", dependencies=[Depends(jwtBearer())], tags=["homepage"])
-def home(token: Annotated[str, Depends(oauth2_scheme)]):
+@app.get("/", tags=["homepage"])
+def home(token: Annotated[str, Depends(jwtBearer())]):
     res = decodeJWT(token)
-    print(res)
     return res
 
 def authenticate_user(email_address: str, password: str, db):

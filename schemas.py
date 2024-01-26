@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 ######################################################################################
 
@@ -36,10 +36,10 @@ class UserUpdate(BaseModel):
 
 class UsersRead(BaseModel):
     id: int
-    first_name: str
-    last_name: str
+    # first_name: str
+    # last_name: str
     email_address: str
-    phone_number: int
+    # phone_number: int
 
 class Token(BaseModel):
     access_token: str

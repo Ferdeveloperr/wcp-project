@@ -1,18 +1,21 @@
 from typing import Annotated, List
 from fastapi import APIRouter, Depends
+from fastapi.security import OAuth2PasswordBearer
+from auth.jwt_bearer import jwtBearer
 from database import SessionLocal, get_db
 from models import *
 from schemas import *
 
 
 db_dependency = Annotated[SessionLocal, Depends(get_db)]
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router = APIRouter()
 
 #######################################################################################
 
 @router.get("/api/users/", response_model=List[UsersRead], tags=["Users"])
-async def read_users(db: db_dependency):
+async def read_all_users(db: db_dependency):
     results = db.query(Users).all()
     return results
 
@@ -28,6 +31,11 @@ async def update_user(id: int, user: UserUpdate, db: db_dependency):
     return user.model_dump(exclude_unset=True)
 
 #######################################################################################
+
+@router.get("/api/wallets/", response_model=List[Wallet], tags=["Wallets"])
+async def read_all_wallets(db: db_dependency):
+    results = db.query(Wallets).all()
+    return results
 
 @router.get("/api/users/{user_id}/wallets", response_model=List[Wallet], tags=["Wallets"])
 async def read_user_wallets(user_id: int, db: db_dependency):
@@ -56,3 +64,6 @@ async def delete_wallet(wallet_id: int, db: db_dependency):
 
 #######################################################################################
 
+@router.post("/logout", tags=["auth"])
+async def logout():
+    return {"message": "Successfully logged out"}
