@@ -9,6 +9,8 @@ db_dependency = Annotated[SessionLocal, Depends(get_db)]
 
 router = APIRouter()
 
+#######################################################################################
+
 @router.get("/api/users/", response_model=List[UsersRead], tags=["Users"])
 async def read_users(db: db_dependency):
     results = db.query(Users).all()
@@ -50,4 +52,7 @@ async def update_wallet(wallet_id: int, wallet: WalletUpdate, db: db_dependency)
 async def delete_wallet(wallet_id: int, db: db_dependency):
     db.query(Wallets).filter(Wallets.id == wallet_id).delete()
     db.commit()
-    return f"Wallet {wallet_id} deleted"
+    return wallet_id
+
+#######################################################################################
+

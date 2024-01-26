@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, BigInteger, DateTime, Numeric, ForeignKey
+from sqlalchemy import Column, String, Boolean, Integer, BigInteger, DateTime, Numeric, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship, Mapped, mapped_column, DeclarativeBase
 from database import Base
@@ -12,7 +12,7 @@ class Users(Base):
     email_address = Column(String, index=True, unique=True)
     phone_number = Column(BigInteger, index=True)
     hashed_password = Column(String)
-    refresh_token = Column(String)
+    verified = Column(Boolean)
     is_active = Column(Integer)
     user_level = Column(Integer, default=10)
     created_on = Column(DateTime(timezone=True), default=func.now())
