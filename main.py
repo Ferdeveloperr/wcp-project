@@ -18,6 +18,7 @@ from fastapi.responses import StreamingResponse, JSONResponse, RedirectResponse
 from decouple import config
 from fastapi import Response
 from auth.httpct import OAuth2PasswordBearerWithCookie
+from router import router
 
 app = FastAPI()
 
@@ -67,6 +68,7 @@ def home(token: Annotated[str, Depends(oauth2_scheme)]):
 @app.get("/", dependencies=[Depends(jwtBearer())], tags=["homepage"])
 def home(token: Annotated[str, Depends(oauth2_scheme)]):
     res = decodeJWT(token)
+    print(res)
     return res
 
 def authenticate_user(email_address: str, password: str, db):
@@ -88,6 +90,8 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
     db.add(create_user_model)
     db.commit()
     return signJWT(create_user_model.id, create_user_model.email_address, create_user_model.user_level)
+
+app.include_router(router)
 
 if __name__ == '__main__':
     uvicorn.run('main:app', reload=True)

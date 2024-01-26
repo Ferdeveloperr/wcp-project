@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, Field
 
 class UserBase(BaseModel):
     email_address: str
@@ -28,3 +29,22 @@ class CreateUserRequest(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+######################################################################################
+    
+class WalletBase(BaseModel):
+    user_id: int
+    blockchain: str
+    wallet_address: str
+    coin_name: str
+    coin_short_name: str
+
+class Wallet(WalletBase):
+    id: int
+
+class WalletUpdate(BaseModel):
+    user_id: Optional[int] = None
+    blockchain: Optional[str] = None
+    wallet_address: Optional[str] = None
+    coin_name: Optional[str] = None
+    coin_short_name: Optional[str] = None
