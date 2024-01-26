@@ -8,7 +8,7 @@ from models import Users
 from auth.jwt_handler import signJWT, token_response, decodeJWT, create_access_token, check_token, refreshJWT
 from auth.jwt_bearer import jwtBearer
 from database import engine, SessionLocal, get_db
-from schemas import CreateUserRequest, UserLogin
+from schemas import CreateUser, UserLogin
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from starlette import status
@@ -51,7 +51,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
     # print(my_header)
     # return {"Hola": "Mundo!"}
     
-@app.post("/token", status_code=status.HTTP_200_OK, tags=["auth"])
+@app.post("/token", status_code=status.HTTP_200_OK, tags=["Auth"])
 def login_for_access_token(response: Response, form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = authenticate_user(form_data.username, form_data.password, db)
     if not user:
@@ -61,11 +61,11 @@ def login_for_access_token(response: Response, form_data: OAuth2PasswordRequestF
         )
     return signJWT(user.id, user.email_address, user.user_level)
 
-@app.get("/refresh-token", dependencies=[Depends(jwtBearer())], tags=["auth"])
-def home(token: Annotated[str, Depends(oauth2_scheme)]):
+@app.get("/refresh-token", tags=["Auth"])
+def refresh_token(token: Annotated[str, Depends(jwtBearer())]):
     return refreshJWT(token)
     
-@app.get("/", tags=["homepage"])
+@app.get("/", tags=["Homepage"])
 def home(token: Annotated[str, Depends(jwtBearer())]):
     res = decodeJWT(token)
     return res
@@ -78,8 +78,8 @@ def authenticate_user(email_address: str, password: str, db):
         return False
     return user
 
-@app.post("/auth/signup", tags=['auth'])
-async def create_user(db: db_dependency, create_user_request: CreateUserRequest):
+@app.post("/auth/signup", tags=['Auth'])
+async def create_user(db: db_dependency, create_user_request: CreateUser):
     exists = db.query(Users).filter(Users.email_address == create_user_request.email_address).first()
     if exists:
         raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT,

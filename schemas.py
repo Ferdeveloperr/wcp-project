@@ -24,7 +24,7 @@ class User(UserBase):
     class Config:
         from_attributes = True
     
-class CreateUserRequest(BaseModel):
+class CreateUser(BaseModel):
     email_address: str
     password: str
     
