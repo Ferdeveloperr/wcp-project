@@ -14,7 +14,7 @@ class Users(Base):
     hashed_password = Column(String)
     refresh_token = Column(String)
     is_active = Column(Integer)
-    user_level = Column(Integer)
+    user_level = Column(Integer, default=10)
     created_on = Column(DateTime(timezone=True), default=func.now())
     
     user = relationship('Wallets', back_populates='wallet')

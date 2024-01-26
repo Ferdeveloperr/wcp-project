@@ -13,11 +13,12 @@ def token_response(token: str):
         "access token": token
     }
 
-def signJWT(id: str, email_address: str):
+def signJWT(id: str, email_address: str, level: int):
     payload = {
         "id": id,
         "sub": email_address,
-        "exp": datetime.now() + timedelta(minutes=TTL)
+        "acc": level,
+        "exp": datetime.utcnow() + timedelta(minutes=TTL)
     }
     token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
     return token_response(token)
@@ -25,10 +26,14 @@ def signJWT(id: str, email_address: str):
 def decodeJWT(token: str):
     try:
         decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
+    except jwt.exceptions.ExpiredSignatureError:
+        return 'Signature has expired'
     except:
         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
+        # return jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
     else:
-        return signJWT(decode_token['id'], decode_token['sub'])
+        # return signJWT(decode_token['id'], decode_token['sub'])
+        return decode_token
 
 def create_access_token(data: dict, expires_delta: timedelta or None = None):
     to_encode = data.copy()
@@ -45,7 +50,20 @@ def check_token(token: str):
         # return jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
     else:
-        if datetime.utcfromtimestamp(decode_token['exp']) > datetime.utcnow():
-            return {"status": "Ok", "sub": decode_token['sub']}
-        else:
-            return {"status": "Unauthorized"}
+        return decode_token
+        # if datetime.utcfromtimestamp(decode_token['exp']) > datetime.utcnow():
+        #     return {"status": "Ok", "sub": decode_token['sub']}
+        # else:
+        #     return {"status": "Unauthorized"}
+
+def refreshJWT(token: str):
+    try:
+        decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
+    except jwt.exceptions.ExpiredSignatureError:
+        return 'Signature has expired'
+    except:
+        # return jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
+        return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
+    else:
+        print('token given')
+        return signJWT(decode_token['id'], decode_token['sub'], decode_token['acc'])
