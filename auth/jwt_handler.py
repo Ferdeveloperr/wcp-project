@@ -1,12 +1,17 @@
 from datetime import timedelta, datetime, time
 import jwt
 from decouple import config
-from fastapi import FastAPI, HTTPException
-from starlette import status
+from fastapi import HTTPException
+from fastapi import status
+from passlib.context import CryptContext
+from models import Users
 
 JWT_SECRET = config("SECRET_KEY")
 JWT_ALGORITHM = config("ALGORITHM")
 TTL = int(config("TTL"))
+
+bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated="auto")
+
 
 def token_response(token: str):
     return {
@@ -30,9 +35,8 @@ def decodeJWT(token: str):
         return 'Signature has expired'
     except:
         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
-        # return jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
     else:
-        # return signJWT(decode_token['id'], decode_token['sub'])
+
         return decode_token
 
 def create_access_token(data: dict, expires_delta: timedelta or None = None):
@@ -47,14 +51,10 @@ def check_token(token: str):
     except jwt.exceptions.ExpiredSignatureError:
         return 'Signature has expired'
     except:
-        # return jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
     else:
         return decode_token
-        # if datetime.utcfromtimestamp(decode_token['exp']) > datetime.utcnow():
-        #     return {"status": "Ok", "sub": decode_token['sub']}
-        # else:
-        #     return {"status": "Unauthorized"}
+
 
 def refreshJWT(token: str):
     try:
@@ -62,8 +62,16 @@ def refreshJWT(token: str):
     except jwt.exceptions.ExpiredSignatureError:
         return 'Signature has expired'
     except:
-        # return jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
     else:
         print('token given')
         return signJWT(decode_token['id'], decode_token['sub'], decode_token['acc'])
+    
+
+def authenticate_user(email_address: str, password: str, db):
+    user = db.query(Users).filter(Users.email_address == email_address).first()
+    if not user:
+        return False
+    if not bcrypt_context.verify(password, user.hashed_password):
+        return False
+    return user

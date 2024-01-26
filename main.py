@@ -1,26 +1,22 @@
-import uvicorn
-from fastapi import FastAPI, HTTPException, Depends, Request, requests
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List, Annotated, Tuple
-from sqlalchemy.orm import Session
+import uvicorn
+
 import models
-from models import Users
-from auth.jwt_handler import signJWT, token_response, decodeJWT, create_access_token, check_token, refreshJWT
-from auth.jwt_bearer import jwtBearer
-from database import engine, SessionLocal, get_db
-from schemas import CreateUser, UserLogin
-from passlib.context import CryptContext
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from starlette import status
-from datetime import datetime, timedelta, timezone
-from starlette.middleware.base import BaseHTTPMiddleware
-from fastapi.responses import StreamingResponse, JSONResponse, RedirectResponse
-from decouple import config
-from fastapi import Response
-from auth.httpct import OAuth2PasswordBearerWithCookie
+from database import engine
 from router import router
 
-app = FastAPI()
+app = FastAPI(
+    title = "WorldCoin+ APIs",
+    description="""
+    APIs for handling users, wallets & transactions
+    FastAPI + PostgreSQL
+    """,
+    version = "0.1"
+)
+
+# Database Creation
+models.Base.metadata.create_all(bind=engine)
 
 origins = [
     "*",
@@ -37,58 +33,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-models.Base.metadata.create_all(bind=engine)
-
-bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated="auto")
-
-db_dependency = Annotated[Session, Depends(get_db)]
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-# @app.get("/", status_code=status.HTTP_200_OK)
-# def landing(request: Request):
-    # my_header = request.headers
-    # print(my_header)
-    # return {"Hola": "Mundo!"}
-    
-@app.post("/token", status_code=status.HTTP_200_OK, tags=["Auth"])
-def login_for_access_token(response: Response, form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = authenticate_user(form_data.username, form_data.password, db)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-        )
-    return signJWT(user.id, user.email_address, user.user_level)
-
-@app.get("/refresh-token", tags=["Auth"])
-def refresh_token(token: Annotated[str, Depends(jwtBearer())]):
-    return refreshJWT(token)
-    
-@app.get("/", tags=["Homepage"])
-def home(token: Annotated[str, Depends(jwtBearer())]):
-    res = decodeJWT(token)
-    return res
-
-def authenticate_user(email_address: str, password: str, db):
-    user = db.query(Users).filter(Users.email_address == email_address).first()
-    if not user:
-        return False
-    if not bcrypt_context.verify(password, user.hashed_password):
-        return False
-    return user
-
-@app.post("/auth/signup", tags=['Auth'])
-async def create_user(db: db_dependency, create_user_request: CreateUser):
-    exists = db.query(Users).filter(Users.email_address == create_user_request.email_address).first()
-    if exists:
-        raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT,
-                            detail='Email already exists in our database.')
-    create_user_model = Users(email_address=create_user_request.email_address,
-                              hashed_password=bcrypt_context.hash(create_user_request.password))
-    db.add(create_user_model)
-    db.commit()
-    return signJWT(create_user_model.id, create_user_model.email_address, create_user_model.user_level)
 
 app.include_router(router)
 
