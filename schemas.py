@@ -1,6 +1,8 @@
 from typing import Optional
 from pydantic import BaseModel, Field
 
+######################################################################################
+
 class UserBase(BaseModel):
     email_address: str
         
@@ -26,6 +28,19 @@ class CreateUserRequest(BaseModel):
     email_address: str
     password: str
     
+class UserUpdate(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    phone_number: Optional[int] = None
+    email_address: Optional[str] = None
+
+class UsersRead(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    email_address: str
+    phone_number: int
+
 class Token(BaseModel):
     access_token: str
     token_type: str
