@@ -4,11 +4,11 @@ class UserBase(BaseModel):
     email_address: str
         
 class UserCreate(UserBase):
-    hased_password: str
+    hashed_password: str
     
 class UserLogin(UserBase):
     email_address: str
-    hased_password: str
+    hashed_password: str
     
 class User(UserBase):
     id: int

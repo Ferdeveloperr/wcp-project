@@ -7,7 +7,7 @@ import models
 from models import Users
 from auth.jwt_handler import signJWT, token_response, decodeJWT, create_access_token, check_token, refreshJWT
 from auth.jwt_bearer import jwtBearer
-from database import engine, SessionLocal
+from database import engine, SessionLocal, get_db
 from schemas import CreateUserRequest, UserLogin
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
@@ -40,13 +40,6 @@ app.add_middleware(
 models.Base.metadata.create_all(bind=engine)
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated="auto")
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 db_dependency = Annotated[Session, Depends(get_db)]
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
