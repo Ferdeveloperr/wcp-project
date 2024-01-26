@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from auth.jwt_bearer import jwtBearer
-from auth.jwt_handler import authenticate_user, decodeJWT, refreshJWT, signJWT, bcrypt_context
+from auth.jwt_handler import authenticate_user, decodeJWT, expiredJWT, refreshJWT, signJWT, bcrypt_context
 from database import SessionLocal, get_db
 from models import *
 from schemas import *
@@ -134,10 +134,10 @@ def home(token: Annotated[str, Depends(jwtBearer())]):
     return res
 
 
-# Work in progress
+# WORK IN PROGRESS
 @router.post("/logout", tags=["Auth"])
 async def logout(token: Annotated[str, Depends(jwtBearer())]):
-    pass
+    return expiredJWT(token)
 
 
 ################################################################################

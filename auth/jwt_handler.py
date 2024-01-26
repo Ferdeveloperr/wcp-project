@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime, time
+from datetime import timedelta, datetime
 import jwt
 from decouple import config
 from fastapi import HTTPException
@@ -8,7 +8,7 @@ from models import Users
 
 JWT_SECRET = config("SECRET_KEY")
 JWT_ALGORITHM = config("ALGORITHM")
-TTL = int(config("TTL"))
+TTL = float(config("TTL"))
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated="auto")
 
@@ -75,3 +75,16 @@ def authenticate_user(email_address: str, password: str, db):
     if not bcrypt_context.verify(password, user.hashed_password):
         return False
     return user
+
+# Returns expired token
+def expiredJWT(token: str):
+    decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
+    payload = {
+        "id": decode_token['id'],
+        "sub": decode_token['sub'],
+        "acc": decode_token['acc'],
+        "exp": 0
+    }
+    expired_token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+    return token_response(expired_token)
+
