@@ -12,8 +12,7 @@ class Users(Base):
     email_address = Column(String, index=True, unique=True)
     phone_number = Column(BigInteger, index=True)
     hashed_password = Column(String)
-    verified = Column(Boolean)
-    is_active = Column(Integer)
+    is_active = Column(Integer, default=1)
     user_level = Column(Integer, default=10)
     created_on = Column(DateTime(timezone=True), default=func.now())
     
