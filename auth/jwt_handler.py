@@ -30,30 +30,27 @@ def signJWT(id: str, email_address: str, level: int):
 
 def decodeJWT(token: str):
     try:
-        decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
-    except jwt.exceptions.ExpiredSignatureError:
-        return 'Signature has expired'
-    except:
-        return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
-    else:
-
-        return decode_token
-
-def create_access_token(data: dict, expires_delta: timedelta or None = None):
-    to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=TTL)
-    to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, JWT_SECRET, algorithm=JWT_ALGORITHM)
-
-def check_token(token: str):
-    try:
-        decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
-    except jwt.exceptions.ExpiredSignatureError:
-        return 'Signature has expired'
+        decode_token: dict = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
     except:
         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
     else:
         return decode_token
+
+# def create_access_token(data: dict, expires_delta: timedelta or None = None):
+#     to_encode = data.copy()
+#     expire = datetime.utcnow() + timedelta(minutes=TTL)
+#     to_encode.update({"exp": expire})
+#     return jwt.encode(to_encode, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+# def check_token(token: str):
+#     try:
+#         decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
+#     except jwt.exceptions.ExpiredSignatureError:
+#         return 'Signature has expired'
+#     except:
+#         return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
+#     else:
+#         return decode_token
 
 
 def refreshJWT(token: str):
