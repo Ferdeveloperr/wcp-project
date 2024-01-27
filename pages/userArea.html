@@ -16,6 +16,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Añadir en el encabezado del HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Pagina principal</title>
 </head>
 
@@ -70,11 +73,16 @@
                 Bienvenido!
             </h1>
         </div>
+        <div>
+            <h4>
+                En el video a continuacion encontrara los pasos a seguir
+            </h4>
+        </div>
 
 
     </section>
 
-    <div>
+    <div class="videoStyle">
         <video src="../image/Alejo y Valentina   Carlitox   Hola vengo a flotar.mp4" controls width="300"></video>
     </div>
 
@@ -83,18 +91,30 @@
 
 
     <section>
-        <h4 class="tittleUserArea">Ingrese la cantidad de monedas que utilizara</h4>
+        <!-- <h4 class="tittleUserArea">Ingrese la cantidad de monedas que utilizara</h4>
         <div class="form-floating mb-3 d-flex flex-column align-items-center">
             <label for="floatingNumberr"></label>
             <input type="number" class="form-control" id="floatingNumberr"
                 placeholder="Ingrese la dirección de su wallet">
+        </div> -->
+        <div class="user-area">
+            <h4 class="tittleUserArea">Ingrese la cantidad de monedas que utilizará</h4>
+            <div class="form-floating mb-3 d-flex flex-column align-items-center">
+                <label for="floatingNumberr"></label>
+                <input type="number" class="form-control" id="floatingNumberr"
+                    placeholder="Ingrese la cantidad de monedas">
+
+            </div>
+
+
         </div>
 
         <!-- Button trigger modal -->
         <div class="text-center">
             <button type="button" class="btn btn-success btn-lg mt-2 w-100" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
+                data-bs-target="#exampleModal" onclick="mostrarCantidad()">
                 OK
+
             </button>
         </div>
 
@@ -107,17 +127,24 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Operacion.</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        ...
+                    <div class="modal-body d-flex align-items-center justify-content-center">
+                        <div class="text-center">
+                            <img src="../image/check.png" alt="imagenDeUsuario" class="mb-3">
+                            <p class="mb-1 fs-5">La cantidad ingresada es: <span id="cantidadMonedas"></span> WLD</p>
+                            <p class="mb-1 fs-5">Rendimiento: 10%</p>
+                            <p class="mb-1 fs-5">Bonos: Semanalmente</p>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="copiarLinkBtn">Copiar
+                        <button type="button" class="btn btn-success" id="copiarLinkBtn">Copiar
                             link</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script src="../copiarlink.js"></script>
 
     </section>
 
@@ -129,10 +156,12 @@
         <h4 class="tittleUserArea">Ingrese la confirmacion de orden</h4>
         <div class="form-floating mb-3 d-flex flex-column align-items-center">
             <label for="floatingNumberr"></label>
-            <input type="number" class="form-control" id="floatingNumberr"
+            <input type="text" class="form-control" id="floatingNumberr"
                 placeholder="Ingrese la dirección de su wallet">
         </div>
+
         <button class="btn btn-success btn-lg mt-2 w-100 text-center" onclick="startTimer()">Ok</button>
+
 
 
 
@@ -158,12 +187,23 @@
     <h4 class="tittleUserArea">Ingrese su wallet</h4>
     <div class="form-floating mb-3 d-flex flex-column align-items-center">
         <label for="floatingNumberr"></label>
-        <input type="number" class="form-control" id="floatingNumberr" placeholder="Ingrese la dirección de su wallet">
+        <input type="text" class="form-control" id="floatingNumberr" placeholder="Ingrese la dirección de su wallet">
 
     </div>
     <button type="submit" href="#" class="btn btn-success btn-lg mt-2 w-100 text-center"
         onclick="return exito()">Ok</button>
 
+
+    <div class="walletStyle">
+        <h3>
+            Una vez termine de ingresar su wallet espere a recibir sus recompensas
+
+        </h3>
+
+        <div class="walletStyleImg">
+            <img src="../image/logoWorldcoinApi.png" alt="">
+        </div>
+    </div>
 
     <hr class="custom-hr">
 
@@ -227,9 +267,12 @@
             Siga los pasos que se muestran a continuacion!
         </h4>
 
-        <video src="../image/Alejo y Valentina   Carlitox   Hola vengo a flotar.mp4" controls width="300"></video>
     </section>
 
+
+    <div class="videoStyle">
+        <video src="../image/Alejo y Valentina   Carlitox   Hola vengo a flotar.mp4" controls width="300"></video>
+    </div>
 
     <hr class="custom-hr">
     <!-- F O O T E R -->
@@ -261,9 +304,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../copiarlink.js"></script>
+
     <script src="../crypto.js"></script>
     <script src="../sweetalert.js"></script>
+    <script src="../cantModal.js"></script>
+
 
 
 </body>

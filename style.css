@@ -86,6 +86,7 @@ h1 {
     margin-top: 40px;
     color: #fff;
     font-weight: 800;
+    font-size: 22px;
 }
 
 
@@ -109,6 +110,16 @@ h1 {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+
+/* ESTILOS DEL BOTON INGRESO ADMIN */
+
+
+.divAdmin {
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 
@@ -161,7 +172,8 @@ input[type="checkbox"] {
 }
 
 .form-control {
-    background-color: black;
+    background-color: #CCC;
+    text-align: center;
 }
 
 
@@ -169,6 +181,8 @@ input[type="checkbox"] {
 
 .userHeader {
     background-color: black;
+
+
 }
 
 
@@ -268,6 +282,9 @@ video {
 }
 
 
+/* SECCION DE COTIZACION CRYPTO */
+
+
 .sectionCrypto {
     display: flex;
     justify-content: center;
@@ -316,6 +333,100 @@ video {
     max-width: 100%;
     height: auto;
 }
+
+
+
+/* ESTILOS DEL USER CONSULTANT */
+
+
+.sectionAdmin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    flex-direction: column;
+    margin-top: 80px;
+
+
+}
+
+.app {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Oswald', sans-serif;
+
+}
+
+.inputQR {
+    width: 250px;
+    outline: 0;
+    border: 1px #ccc solid;
+    border-radius: 3px;
+    padding: 5px;
+    transition: all .5 ease-in-out;
+}
+
+.inputQR:focus {
+    border: 1px royalblue solid;
+}
+
+#btnQR {
+    margin-top: 1rem;
+    width: 200px;
+    background-color: seagreen;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    outline: 0;
+    border: 0;
+    transition: all .5 ease-in-out;
+    cursor: pointer;
+}
+
+#btnQR:hover {
+    opacity: 85%;
+}
+
+.qrcode {
+    margin-top: 5rem;
+    width: 228px;
+    height: 228px;
+}
+
+
+
+
+/* ESTILOS DE VIDEOS */
+
+.videoStyle {
+    background-color: black;
+    border-radius: 60px;
+    border: 3px #ccc solid;
+}
+
+.walletStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 120px;
+}
+
+.walletStyleImg {
+
+    width: 20%;
+    flex-direction: column;
+    margin-top: 50px;
+
+}
+
 
 
 @media (max-width: 768px) {
