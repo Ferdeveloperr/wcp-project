@@ -1,19 +1,4 @@
-HTML
 
-<div id="countdown"></div>
-
-
-CSS
-
-#countdown {
-  font-family: Arial, sans-serif;
-  font-size: 3em;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 10%;
-}
-
-JAVASCRIPT
 
 const countdownElement = document.getElementById('countdown');
 
