@@ -18,10 +18,3 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
-
-
-
-
-
-
-
