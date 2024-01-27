@@ -75,7 +75,7 @@ def authenticate_user(email_address: str, password: str, db):
 
 # Returns expired token
 def expiredJWT(token: str):
-    decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
+    decode_token = decodeJWT(token)
     payload = {
         "id": decode_token['id'],
         "sub": decode_token['sub'],
