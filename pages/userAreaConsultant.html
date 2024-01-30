@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Libre+Franklin&family=Noto+Serif&family=Oswald&family=Roboto+Mono&family=Rubik&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Pagina Asesor</title>
+</head>
+
+<body>
+
+
+    <!-- U S E R  A R E A -->
+    <header class="userHeader">
+
+        <!-- Agregamos el nav -->
+        <nav class="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a href="../index.html" class="Logo">
+                    <img src="../image/logoPruebaa.png" alt="Logo" height="30px" width="30px">
+                </a>
+                <div class="logoStyle"><a class="navbar-brand" href="./userArea.html">WorldPlus</a></div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="terms.html" target="_blank">Terminos y condiciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../pages/forgotPassword.html">Recuperar contraseña</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">Cerrar sesion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footerSection">Pie de pagina</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+
+
+    <section class="sectionAdmin">
+        <h1>
+            Panel de control
+        </h1>
+        <br>
+        <h3>
+            Escanea e ingresa
+        </h3>
+
+    </section>
+
+    <div class="app">
+        <input type="text" id="url" placeholder="https://example.com">
+        <button id="btnQR">Generar QR</button>
+
+        <div id="qrcode" class="qrcode"></div>
+    </div>
+    <script src="../js/qrcode.js"></script>
+
+
+
+
+    <hr class="custom-hr">
+
+
+    <section class="sectionAdmin">
+        <div>
+            <h2>
+                Lista de usuarios
+            </h2>
+        </div>
+
+        <div class="textUsuarios">
+            <p>Usuario: xxxx</p>
+            <p>Estado: xxxx</p>
+        </div>
+        <div>
+            <p>Usuario: xxxx</p>
+            <p>Estado: xxxx</p>
+        </div>
+
+
+    </section>
+
+
+    <hr class="custom-hr">
+    <!-- F O O T E R -->
+
+    <section id="footerSection">
+        <footer class="bg-black text-white py-4 mt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p><a href="terms.html" target="_blank" class="text-white">Términos y Condiciones</a></p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p>Derechos Reservados &copy; 2024 WorldPlus</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <p><a href="https://wa.me/tunumero" class="text-white" target="_blank">Área de Soporte
+                            </a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</body>
+
+</html>
