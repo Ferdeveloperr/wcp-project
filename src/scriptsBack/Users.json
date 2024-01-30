@@ -1,0 +1,20 @@
+[
+    {
+        "email_address": "mail@gmail.com",
+        "id": 1,
+        "first_name": "fulanito",
+        "last_name": "perez",
+        "phone_number": 12345,
+        "is_active": 2,
+        "user_level": 10
+    },
+    {
+        "email_address": "another@mail.com",
+        "id": 2,
+        "first_name": "otro",
+        "last_name": "usuario",
+        "phone_number": 67890,
+        "is_active": 1,
+        "user_level": 5
+    }
+]
