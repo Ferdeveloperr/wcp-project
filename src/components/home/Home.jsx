@@ -120,7 +120,7 @@ const Home = () => {
 
             <div className="divAdmin">
                 <p>
-                    <Link to="/UserAreaConsultant" className="btn btn-info btn-sm">Admin</Link>
+                    <Link to="/UserAreaConsultant" className="btn btn-dark btn-sm">Admin</Link>
                 </p>
             </div>
         </>

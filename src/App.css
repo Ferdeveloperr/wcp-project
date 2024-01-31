@@ -110,6 +110,7 @@ h1 {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 
@@ -160,10 +161,20 @@ input[type="checkbox"] {
 /* REGISTRO DE USUARIOS */
 
 .tituloRegistro {
+
     margin-bottom: 55px;
+    background: #000;
+    color: white;
+    border-radius: 150px;
+    border: 2px solid white;
+    font-size: 35px;
+
+
+
 }
 
 .containerRegistro {
+
     text-align: center;
 }
 
@@ -187,16 +198,28 @@ input[type="checkbox"] {
 }
 
 
+/* ESTILOS DEL USER AREA */
+
+
+.UserAreaSectionText {
+
+    margin-bottom: 100px;
+    margin-top: 100px;
+
+}
+
+
 /* Estilos de titulo */
 
 .titleSection {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Noto Serif', serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 20px;
+    margin-top: 40px;
 
 }
 
@@ -231,11 +254,32 @@ video {
     border-radius: 35px;
     width: 80%;
     margin-left: 10%;
+    padding: 20px;
+}
+
+
+/* ESTILOS TIMER ESTATICO */
+
+
+.timerEstatico {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.tituloEstatico {
+    margin-bottom: 60px;
 }
 
 
 
+
+
+
 /* Estilos timer */
+
 
 .timerStyle {
     font-family: 'Arial', sans-serif;
@@ -294,7 +338,7 @@ video {
 }
 
 .containerCrypto {
-    background: #ccc;
+    background: whitesmoke;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -345,16 +389,27 @@ video {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 50vh;
+    height: 20vh;
     flex-direction: column;
     margin-top: 80px;
 
 
 }
 
+.sectionAdminDos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50vh;
+    flex-direction: column;
+    margin-top: 80px;
+
+}
+
 .app {
     width: 100%;
-    height: 70vh;
+    height: 55vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -401,6 +456,24 @@ video {
 }
 
 
+/* ESTILOS DE TEXTO ULTIMO VIDEO */
+
+.titleSectionDos {
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background: whitesmoke;
+    margin-bottom: 50px;
+    border-radius: 150px;
+}
+
+
+
+
 
 
 /* ESTILOS DE VIDEOS */
@@ -438,7 +511,7 @@ video {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 40vh;
+        height: 30vh;
     }
 
     .containerCrypto {
@@ -480,7 +553,7 @@ video {
         justify-content: center;
         text-align: center;
         font-family: 'Rubik', sans-serif;
-        margin-top: 300px;
+        margin-top: 200px;
         font-size: 60px;
         background: whitesmoke;
         color: black;

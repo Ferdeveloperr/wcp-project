@@ -39,7 +39,7 @@ const ForgotPassword = () => {
 
     return (
         <div>
-            <Link to="/Home" className="btn btn-info btn-sm">
+            <Link to="/Home" className="btn btn-dark btn-sm">
                 Home
             </Link>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logoWorldcoinApi from '../image/logoWorldcoinApi.png';
@@ -8,32 +8,31 @@ import AlejoValentina from '../image/AlejoValentina.mp4';
 import tutorialWld from '../image/tutorialWld.mp4';
 import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
 import { Link } from 'react-router-dom';
-import check from '../image/check.png'
-import { useEffect, useState, useRef } from 'react';
+import check from '../image/check.png';
 import Swal from 'sweetalert2';
-
-
+import videoPruebaaa from '../image/videoPruebaaa.mp4'
+import { convertirSegundosAHorasMinutosSegundos } from '../userArea/timer';
 
 const UserArea = () => {
-
-
-
     const [cantidadMonedas, setCantidadMonedas] = useState(0);
     const inputCantidadRef = useRef(null);
+    const [tiempoRestante, setTiempoRestante] = useState(() => {
+        const tiempoGuardado = localStorage.getItem('tiempoRestante');
+        return tiempoGuardado ? parseInt(tiempoGuardado, 10) : 0;
+    });
+
 
     const mostrarCantidad = () => {
-        // Obtener la cantidad de monedas desde el input
-        const inputCantidad = document.getElementById('floatingNumberr');
+        const inputCantidad = inputCantidadRef.current;
         const cantidad = inputCantidad.value.trim();
 
-        // Verificar si la cantidad es válida
         if (!isNaN(cantidad) && cantidad > 0) {
             setCantidadMonedas(cantidad);
-
-            // Mostrar SweetAlert
             exito();
+
+            // Inicia el temporizador después de confirmar la operación
+            startTimer();
         } else {
-            // Mostrar mensaje de error
             Swal.fire({
                 title: 'Error',
                 text: 'Ingrese una cantidad válida de monedas',
@@ -43,19 +42,15 @@ const UserArea = () => {
     };
 
     const copiarLink = () => {
-        // Obtener la dirección de URL deseada
-        const url = 'https://app.lofi.co/'; // Reemplaza con tu URL
+        const url = '0x3129bdddaa67f1c0430e525cccc4f9ee8b8ca898';
 
-        // Intentar copiar al portapapeles
         navigator.clipboard.writeText(url)
             .then(() => {
-                // Mostrar mensaje de éxito
                 Swal.fire('Link copiado!', 'El link ha sido copiado correctamente.', 'success');
             })
             .catch((error) => {
                 console.error('Error al intentar copiar al portapapeles:', error);
 
-                // Mostrar mensaje de error
                 Swal.fire({
                     title: 'Error',
                     text: 'No se pudo copiar el link al portapapeles',
@@ -65,13 +60,12 @@ const UserArea = () => {
     };
 
     const exito = () => {
-        // SweetAlert para éxito
         Swal.fire({
             title: 'Confirmar Operacion.',
             html: `
                 <img src=${check} alt="imagenDeUsuario" class="mb-3" />
                 
-                <p class="mb-1 fs-5">Rendimiento: 30%</p>
+                <p class="mb-1 fs-5">Rendimiento: 10WLD</p>
                 <p class="mb-1 fs-5">Bono: Quincenalmente</p>
             `,
             icon: 'success',
@@ -82,31 +76,61 @@ const UserArea = () => {
             cancelButtonText: 'Cerrar',
         }).then((result) => {
             if (result.isConfirmed) {
-                // Acción a realizar al hacer clic en "Copiar link"
                 copiarLink();
             }
         });
     };
 
     const startTimer = () => {
-        // Implementa la lógica necesaria para iniciar el temporizador
+        // Inicia el temporizador solo si no está activo
+        if (tiempoRestante === 0) {
+            // Establece el tiempo total a 72 horas en segundos
+            const tiempoTotal = 72 * 60 * 60;
+
+            // Actualiza el estado con el tiempo restante
+            setTiempoRestante(tiempoTotal);
+
+            // Configura el temporizador
+            const intervalId = setInterval(() => {
+                setTiempoRestante((prevTiempo) => {
+                    const nuevoTiempo = prevTiempo - 1;
+
+                    // Almacena el tiempo restante en el localStorage
+                    localStorage.setItem('tiempoRestante', nuevoTiempo);
+
+                    return nuevoTiempo;
+                });
+            }, 1000);
+
+            // Limpia el temporizador cuando el componente se desmonta
+            return () => clearInterval(intervalId);
+        }
     };
 
 
+    useEffect(() => {
+        // Obtiene el tiempo restante del localStorage al cargar el componente
+        const tiempoGuardado = localStorage.getItem('tiempoRestante');
+
+        if (tiempoGuardado) {
+            setTiempoRestante(parseInt(tiempoGuardado, 10));
+        }
+    }, []);
 
 
     useEffect(() => {
+        // Almacenar en el localStorage cada vez que el tiempoRestante cambie
+        localStorage.setItem('tiempoRestante', tiempoRestante.toString());
+    }, [tiempoRestante]);
 
-
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
                     "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cworldcoin&vs_currencies=usd"
-
                 );
                 const data = await response.json();
 
-                // Actualizar los elementos HTML con los precios
                 document.getElementById("bitcoin").innerHTML = data.bitcoin.usd;
                 document.getElementById("ethereum").innerHTML = data.ethereum.usd;
                 document.getElementById("worldcoin").innerHTML = data.worldcoin.usd;
@@ -115,35 +139,31 @@ const UserArea = () => {
             }
         };
 
-        // Llamar a la función fetchData cuando el componente se monta
         fetchData();
-        console.log(fetchData)
-    }, [])
+    }, []);
 
+    const handleVerificationTime = () => {
+        // Inicia manualmente el temporizador al hacer clic en el botón
+        startTimer();
+    };
 
-    const handleClick = () => {
-        // Obtener el valor del input de ID de transacción
+    const handleTransactionId = () => {
         const idTransaccion = document.getElementById('transaccionId').value.trim();
 
-        // Verificar si el campo está vacío
         if (idTransaccion === '') {
-            // Mostrar mensaje de error
             Swal.fire({
                 title: 'Error',
                 text: 'Por favor, ingrese el ID de Transacción',
                 icon: 'error',
             });
         } else {
-            // Mostrar mensaje de éxito
-            Swal.fire(
-                'Felicitaciones',
-                'Has ingresado correctamente su ID de Transacción!',
-                'success'
-            );
+            Swal.fire({
+                title: 'Éxito',
+                text: 'Ha ingresado su ID de transacción correctamente',
+                icon: 'success',
+            });
         }
     };
-
-
 
     return (
         <div>
@@ -210,7 +230,7 @@ const UserArea = () => {
 
                 <div>
                     <h1>
-                        Bienvenido!
+                        ¡Bienvenido!
                     </h1>
                 </div>
                 <div>
@@ -221,7 +241,7 @@ const UserArea = () => {
             </section>
 
             <div className="videoStyle">
-                <video src={AlejoValentina} controls width="300"></video>
+                <video src={videoPruebaaa} controls width="300"></video>
             </div>
 
             {/* Linea divisoria */}
@@ -282,8 +302,8 @@ const UserArea = () => {
                                     <p className="mb-1 fs-5">
                                         La cantidad ingresada es: <span id="cantidadMonedas">{cantidadMonedas}</span> WLD
                                     </p>
-                                    <p className="mb-1 fs-5">Rendimiento: 30%</p>
-                                    <p className="mb-1 fs-5">Bono: Quincenalmente</p>
+                                    <p className="mb-1 fs-5">Rendimiento: 10WLD</p>
+                                    <p className="mb-1 fs-5">Bonos: Quincenalmente</p>
                                 </div>
                             </div>
                             {/* <div className="modal-footer">
@@ -306,7 +326,7 @@ const UserArea = () => {
 
 
 
-            <section>
+            <section className='UserAreaSectionText'>
 
                 <br></br>
                 <h4 className="tittleUserArea">Ingrese ID de transaccion</h4>
@@ -316,13 +336,39 @@ const UserArea = () => {
                         placeholder="Ingrese la dirección de su wallet" />
                 </div>
 
-                <button className="btn btn-success btn-lg mt-2 w-100 text-center" onClick={handleClick}>Ok</button>
+                <button
+                    type="button"
+                    className="btn btn-success btn-lg mt-2 w-100"
+                    onClick={handleTransactionId}
+                >
+                    OK
+                </button>
 
             </section>
 
 
 
             {/* SECCION DE TIMER */}
+
+
+
+            <div className='timerEstatico'>
+                <h2 className='tituloEstatico'>
+                    Tiempo estimado de procesamiento
+                </h2>
+
+
+
+                <h5>
+                    El tiempo estimado que demora su transaccion sera de 3 a 5 dias habiles
+                </h5>
+
+                <br />
+
+                <h6>Tenga en cuenta que si no se registra Operacion realizada el tiempo estimado queda sin efecto</h6>
+            </div>
+
+
 
 
 
@@ -333,7 +379,7 @@ const UserArea = () => {
 
             <div className="walletStyle">
                 <h3>
-                    Una vez termine de ingresar su wallet espere a recibir sus recompensas
+                    Recuerde ingresar su wallet en el menu superior dentro de la seccion "Mis Billeteras"
                 </h3>
 
                 <div className="walletStyleImg">
@@ -382,13 +428,16 @@ const UserArea = () => {
             <hr className="custom-hr" />
 
 
-            <section className="titleSection">
+            <section className="titleSectionDos">
                 <h2>
                     Tutorial para cambiar tus criptomonedas
                 </h2>
-                <h4>
-                    Siga los pasos que se muestran a continuacion!
-                </h4>
+
+                <br />
+
+                <h5>
+                    Siga los pasos que se muestran en el video a continuacion
+                </h5>
 
             </section>
 

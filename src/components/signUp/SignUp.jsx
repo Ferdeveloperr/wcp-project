@@ -38,7 +38,7 @@ const SignUp = () => {
     return (
         <>
             <div className="back-link">
-                <Link to="/Home" className="btn btn-info btn-sm">Home</Link>
+                <Link to="/Home" className="btn btn-dark btn-sm">Home</Link>
             </div>
 
             <header className="container">
@@ -120,14 +120,26 @@ const SignUp = () => {
                         {errors.password && <div className="invalid-feedback">Este campo es requerido.</div>}
                     </div>
 
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+                            <label class="form-check-label" for="invalidCheck">
+                                Acepto los terminos y condiciones
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" className="btn btn-dark btn-lg">Enviar</button>
                 </form>
             </section>
 
             <section className="button-section">
-                <label className="checkbox-label">
+                {/* <label className="checkbox-label">
                     <input type="checkbox" /> ACEPTO LOS TERMINOS Y CONDICIONES
-                </label>
+                </label> */}
 
                 <Link to="/Home" className="btn btn-dark btn-lg">Ya tienes una cuenta? Ingresa</Link>
 

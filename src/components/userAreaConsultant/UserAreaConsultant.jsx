@@ -134,7 +134,7 @@ const UserAreaConsultant = () => {
 
             <hr className="custom-hr" />
 
-            <section className="sectionAdmin">
+            <section className="sectionAdminDos">
                 <div>
                     <h2>Lista de usuarios</h2>
                 </div>
