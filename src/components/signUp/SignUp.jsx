@@ -12,7 +12,7 @@ const SignUp = () => {
     const onSubmit = async (data) => {
         try {
             // Realizar la solicitud al backend
-            const response = await fetch('https://tu-api-endpoint.com/register', {
+            const response = await fetch('https://www.worldplus.com.ar/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const SignUp = () => {
                             className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
                             id="floatingText"
                             placeholder="Ingrese su nombre"
-                        // {...register('firstName', { required: 'Este campo es requerido' })}
+                            {...register('firstName', { required: 'Este campo es requerido' })}
                         />
                         {errors.firstName && <div className="invalid-feedback">{errors.firstName.message}</div>}
                     </div>
@@ -68,10 +68,11 @@ const SignUp = () => {
                             className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                             id="floatingTextSurname"
                             placeholder="Ingrese su nombre y apellido"
-                        // {...register('lastName', { required: 'Este campo es requerido' })}
+                            {...register('lastName', { required: 'Este campo es requerido' })}
                         />
                         {errors.lastName && <div className="invalid-feedback">{errors.lastName.message}</div>}
                     </div>
+
 
                     <div className="form-floating mb-3">
                         <label htmlFor="floatingPhone"><b>Telefono</b></label>

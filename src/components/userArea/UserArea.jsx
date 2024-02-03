@@ -142,10 +142,7 @@ const UserArea = () => {
         fetchData();
     }, []);
 
-    const handleVerificationTime = () => {
-        // Inicia manualmente el temporizador al hacer clic en el botón
-        startTimer();
-    };
+
 
     const handleTransactionId = () => {
         const idTransaccion = document.getElementById('transaccionId').value.trim();

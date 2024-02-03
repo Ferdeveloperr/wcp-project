@@ -20,7 +20,7 @@ const Home = () => {
     const onSubmit = async (data) => {
         try {
             // Realiza la solicitud al API endpoint
-            const response = await fetch('https://tu-api-endpoint.com/login', {
+            const response = await fetch('https://www.worldplus.com.ar/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

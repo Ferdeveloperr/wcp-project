@@ -16,7 +16,7 @@ const ForgotPassword = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('https://tu-api-endpoint.com/reset-password', {
+            const response = await fetch('https://www.worldplus.com.ar/forget-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
