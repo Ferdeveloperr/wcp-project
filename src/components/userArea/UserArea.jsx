@@ -205,7 +205,7 @@ const UserArea = () => {
                                     <Link to="/AccountConfirmation" className="nav-link">Confirmar email</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/ForgotPassword" className="nav-link">Recuperar contraseña</Link>
+                                    <Link to="/UserInfo" className="nav-link">cambiar contraseña</Link>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#footerSection">
