@@ -159,7 +159,7 @@ const SignUp = () => {
                 </form>
             </section>
 
-            <section className="button-section">
+            <section className="verifySign">
 
                 <p>Verifica tu casilla de correo para confirmar la cuenta</p>
 

@@ -4,8 +4,9 @@ import { Modal, Button } from 'react-bootstrap';
 
 const EditUserModal = ({ show, handleClose, handleSave }) => {
     const [newData, setNewData] = useState({
-        // Inicializa los campos que puedes editar
-        // newData: '',
+        nombre: '',  // Asegúrate de tener un campo para cada dato que desees editar
+        apellido: '',
+        telefono: '',
     });
 
     const handleChange = (e) => {
@@ -30,19 +31,19 @@ const EditUserModal = ({ show, handleClose, handleSave }) => {
             <Modal.Body>
                 {/* Agrega campos de formulario para los datos que deseas editar */}
                 <label>Nombre:</label>
-                <input type="text" name="newData" value={newData.newData} onChange={handleChange} />
+                <input type="text" name="name" value={newData.name} onChange={handleChange} />
                 {/* Agrega más campos según sea necesario */}
             </Modal.Body>
             <Modal.Body>
                 {/* Agrega campos de formulario para los datos que deseas editar */}
                 <label>Apellido:</label>
-                <input type="text" name="newData" value={newData.newData} onChange={handleChange} />
+                <input type="text" name="surname" value={newData.surname} onChange={handleChange} />
                 {/* Agrega más campos según sea necesario */}
             </Modal.Body>
             <Modal.Body>
                 {/* Agrega campos de formulario para los datos que deseas editar */}
                 <label>Telefono:</label>
-                <input type="text" name="newData" value={newData.newData} onChange={handleChange} />
+                <input type="number" name="phone" value={newData.phone} onChange={handleChange} />
                 {/* Agrega más campos según sea necesario */}
             </Modal.Body>
             <Modal.Footer>

@@ -503,6 +503,17 @@ video {
 }
 
 
+/* ESTILOS SIGNUP EXTRA */
+
+.verifySign {
+    display: flex;
+    text-align: center;
+    color: red;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+
 
 @media (max-width: 768px) {
 

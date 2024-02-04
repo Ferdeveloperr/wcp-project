@@ -9,6 +9,11 @@ const WalletList = () => {
     const [wallets, setWallets] = useState([]);
     const [newWallet, setNewWallet] = useState('');
 
+
+    const toggleOptions = () => {
+        setShowOptions(!showOptions);
+    };
+
     useEffect(() => {
         // Recuperar las wallets almacenadas en el backend al cargar el componente
         fetchWalletsFromBackend();
@@ -16,48 +21,56 @@ const WalletList = () => {
 
     const fetchWalletsFromBackend = async () => {
         try {
-            // Realizar la solicitud al backend para obtener las wallets del usuario
-            const response = await fetch('https://www.worldplus.com.ar/api/wallets/me', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer tu_token_de_autorizacion',  // Agrega cualquier header necesario
-                },
-            });
+            const token = localStorage.getItem('token');
 
-            if (response.ok) {
-                const data = await response.json();
-                setWallets(data.wallets);
+            if (token) {
+                // Realizar la solicitud al backend para obtener las wallets del usuario
+                const response = await fetch('https://www.worldplus.com.ar/api/wallets/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setWallets(data.wallets);
+                } else {
+                    console.error('Error al obtener las wallets del backend');
+                }
             } else {
-                console.error('Error al obtener las wallets del backend');
+                console.error('No hay token en localStorage');
             }
         } catch (error) {
             console.error('Error en la solicitud al backend:', error);
         }
     };
 
-    const toggleOptions = () => {
-        setShowOptions(!showOptions);
-    };
-
     const addWallet = async () => {
         try {
-            // Realizar la solicitud al backend para agregar una nueva wallet
-            const response = await fetch('https://tu-api-endpoint.com/api/wallets', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer tu_token_de_autorizacion',  // Agrega cualquier header necesario
-                },
-                body: JSON.stringify({ wallet: newWallet }),
-            });
+            const token = localStorage.getItem('token');
 
-            if (response.ok) {
-                // Actualizar las wallets después de agregar una nueva
-                fetchWalletsFromBackend();
-                // Limpiar el input de nueva wallet
-                setNewWallet('');
+            if (token) {
+                // Realizar la solicitud al backend para agregar una nueva wallet
+                const response = await fetch('https://tu-api-endpoint.com/api/wallets', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ wallet: newWallet }),
+                });
+
+                if (response.ok) {
+                    // Actualizar las wallets después de agregar una nueva
+                    fetchWalletsFromBackend();
+                    // Limpiar el input de nueva wallet
+                    setNewWallet('');
+                } else {
+                    console.error('Error al agregar la nueva wallet en el backend');
+                }
             } else {
-                console.error('Error al agregar la nueva wallet en el backend');
+                console.error('No hay token en localStorage');
             }
         } catch (error) {
             console.error('Error en la solicitud al backend:', error);
@@ -66,24 +79,31 @@ const WalletList = () => {
 
     const removeWallet = async (index) => {
         try {
-            // Realizar la solicitud al backend para eliminar una wallet
-            const response = await fetch(`https://tu-api-endpoint.com/api/wallets/${wallets[index].id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': 'Bearer tu_token_de_autorizacion',  // Agrega cualquier header necesario
-                },
-            });
+            const token = localStorage.getItem('token');
 
-            if (response.ok) {
-                // Actualizar las wallets después de eliminar una
-                fetchWalletsFromBackend();
+            if (token) {
+                // Realizar la solicitud al backend para eliminar una wallet
+                const response = await fetch(`https://tu-api-endpoint.com/api/wallets/${wallets[index].id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (response.ok) {
+                    // Actualizar las wallets después de eliminar una
+                    fetchWalletsFromBackend();
+                } else {
+                    console.error('Error al eliminar la wallet en el backend');
+                }
             } else {
-                console.error('Error al eliminar la wallet en el backend');
+                console.error('No hay token en localStorage');
             }
         } catch (error) {
             console.error('Error en la solicitud al backend:', error);
         }
     };
+
 
     return (
         <div className="d-flex flex-column align-items-center justify-content-center h-100">

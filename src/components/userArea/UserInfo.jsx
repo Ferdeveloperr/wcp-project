@@ -49,14 +49,36 @@ const UserInfo = () => {
         setShowModal(false);
     };
 
-    const handleSaveChanges = (newData) => {
-        // Lógica para guardar los nuevos datos en el backend
-        // ...
+    const handleSaveChanges = async (newData) => {
+        try {
+            const token = localStorage.getItem('token');
 
-        // Actualizar el estado con los nuevos datos si es necesario
-        // setUserData(newUserData);
+            if (token) {
+                const response = await fetch('https://worldplus.com.ar/api/users/me', {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newData),
+                });
 
-        handleCloseModal();
+                if (response.ok) {
+                    const updatedData = await response.json();
+                    // Actualizar el estado con los nuevos datos si es necesario
+                    // setUserData(updatedData);
+                    console.log('Datos actualizados:', updatedData);
+                } else {
+                    console.error('Error al guardar cambios:', response.statusText);
+                }
+            } else {
+                console.error('No hay token en localStorage');
+            }
+        } catch (error) {
+            console.error('Error al guardar cambios:', error);
+        }
+
+        handleCloseModal(); console.log(handleCloseModal)
     };
 
     return (
@@ -112,7 +134,7 @@ const UserInfo = () => {
             </header>
 
             <div>
-                <h1>UserInfo</h1>
+                <h1>Informacion de usuario</h1>
                 {/* Mostrar datos del usuario en la pantalla */}
                 {userData && userData.map((user) => (
                     <div key={user.id}>

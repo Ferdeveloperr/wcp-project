@@ -4,14 +4,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logoWorldcoinApi from '../image/logoWorldcoinApi.png';
 import logoBitcoinDos from '../image/logoBitcoinDos.png';
 import EthereumLogoWine from '../image/EthereumLogoWine.png';
-import AlejoValentina from '../image/AlejoValentina.mp4';
 import tutorialWld from '../image/tutorialWld.mp4';
 import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
 import { Link } from 'react-router-dom';
 import check from '../image/check.png';
 import Swal from 'sweetalert2';
 import videoPruebaaa from '../image/videoPruebaaa.mp4'
-import { convertirSegundosAHorasMinutosSegundos } from '../userArea/timer';
+
 
 const UserArea = () => {
     const [cantidadMonedas, setCantidadMonedas] = useState(0);
