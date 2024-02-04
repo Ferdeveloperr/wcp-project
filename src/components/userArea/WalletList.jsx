@@ -17,7 +17,7 @@ const WalletList = () => {
     const fetchWalletsFromBackend = async () => {
         try {
             // Realizar la solicitud al backend para obtener las wallets del usuario
-            const response = await fetch('https://tu-api-endpoint.com/api/wallets/me', {
+            const response = await fetch('https://www.worldplus.com.ar/api/wallets/me', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer tu_token_de_autorizacion',  // Agrega cualquier header necesario

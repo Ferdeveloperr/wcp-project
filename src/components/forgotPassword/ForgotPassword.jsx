@@ -16,7 +16,7 @@ const ForgotPassword = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('https://www.worldplus.com.ar/forget-password', {
+            const response = await fetch('https://worldplus.com.ar/forget-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const ForgotPassword = () => {
                     </div>
 
                     <button type="submit" className="btn btn-dark btn-lg">
-                        Enviar instrucciones
+                        Cambiar contraseña
                     </button>
                 </form>
 

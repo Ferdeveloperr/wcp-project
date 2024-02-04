@@ -4,7 +4,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import Home from './components/home/Home';
 import SignUp from './components/signUp/SignUp';
 import Terms from './components/terms/Terms';
@@ -21,6 +21,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/SignUp" element={<SignUp />} />

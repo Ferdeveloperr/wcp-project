@@ -1,18 +1,21 @@
+
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import usuarioGenericoDos from '../image/usuarioGenericoDos.png';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [token, setToken] = useState('');
 
     const onSubmit = async (data) => {
         try {
             // Realizar la solicitud al backend
-            const response = await fetch('https://www.worldplus.com.ar/signup', {
+            const response = await fetch('https://worldplus.com.ar/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,8 +25,11 @@ const SignUp = () => {
 
             // Verificar si la solicitud fue exitosa
             if (response.ok) {
-                const responseData = await response.json();
-                console.log('Datos enviados al backend:', responseData);
+                const token = await response.json();
+                console.log('Datos enviados al backend:', token);
+
+                handleToken(token.token);
+
             } else {
                 console.error('Error al enviar los datos al backend:', response.statusText);
             }
@@ -31,7 +37,23 @@ const SignUp = () => {
             console.error('Error inesperado:', error);
         }
 
+
+
         reset();
+
+    };
+
+    // const history = useHistory();
+
+
+
+    const handleToken = (token = token) => {
+        // Almacenar el token en el localStorage
+        localStorage.setItem('token', token);
+        // Actualizar el estado con el token si es necesario
+        setToken(token);
+        // También puedes realizar acciones adicionales aquí según tus necesidades
+        // history.push('/UserInfo');
     };
 
 
@@ -56,7 +78,7 @@ const SignUp = () => {
                             className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
                             id="floatingText"
                             placeholder="Ingrese su nombre"
-                            {...register('firstName', { required: 'Este campo es requerido' })}
+                            {...register('firstName',)}
                         />
                         {errors.firstName && <div className="invalid-feedback">{errors.firstName.message}</div>}
                     </div>
@@ -68,7 +90,7 @@ const SignUp = () => {
                             className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                             id="floatingTextSurname"
                             placeholder="Ingrese su nombre y apellido"
-                            {...register('lastName', { required: 'Este campo es requerido' })}
+                            {...register('lastName',)}
                         />
                         {errors.lastName && <div className="invalid-feedback">{errors.lastName.message}</div>}
                     </div>
@@ -121,13 +143,13 @@ const SignUp = () => {
                         {errors.password && <div className="invalid-feedback">Este campo es requerido.</div>}
                     </div>
 
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
-                            <label class="form-check-label" for="invalidCheck">
+                    <div className="col-12">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+                            <label className="form-check-label" htmlFor="invalidCheck">
                                 Acepto los terminos y condiciones
                             </label>
-                            <div class="invalid-feedback">
+                            <div className="invalid-feedback">
                                 You must agree before submitting.
                             </div>
                         </div>
@@ -138,11 +160,8 @@ const SignUp = () => {
             </section>
 
             <section className="button-section">
-                {/* <label className="checkbox-label">
-                    <input type="checkbox" /> ACEPTO LOS TERMINOS Y CONDICIONES
-                </label> */}
 
-                <Link to="/Home" className="btn btn-dark btn-lg">Ya tienes una cuenta? Ingresa</Link>
+                <p>Verifica tu casilla de correo para confirmar la cuenta</p>
 
             </section>
         </>

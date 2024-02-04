@@ -3,42 +3,65 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
 import { Link } from 'react-router-dom';
-
+import EditUserModal from '../userArea/EditModal';
 
 const UserInfo = () => {
-
-
     const [userData, setUserData] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                // Importar el archivo JSON usando import
-                const response = await import('../../scriptsBack/Users.json');
-                const usersData = response.default; // Obtener el contenido del módulo
+                const token = localStorage.getItem('token');
 
-                // Hacer la solicitud al API Endpoint
-                // const response = await fetch('https://tu-api-endpoint.com/users');
-                // const usersData = await response.json(); // Obtener los datos JSON
+                if (token) {
+                    const response = await fetch('https://worldplus.com.ar/api/users/me', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
 
-                // Actualizar el estado con los datos del usuario
-                setUserData(usersData);
-
-                // Mostrar en consola
-                console.log(usersData);
+                    if (response.ok) {
+                        const userData = await response.json();
+                        setUserData(userData);
+                        console.log(userData);
+                    } else {
+                        console.error('Error al obtener datos del usuario:', response.statusText);
+                    }
+                } else {
+                    console.error('No hay token en localStorage');
+                }
             } catch (error) {
-                console.error('Error al cargar Users.json:', error);
+                console.error('Error al cargar datos del usuario:', error);
             }
         };
 
-        // Llamar a la función de carga de datos
         fetchUserData();
     }, []);
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const handleSaveChanges = (newData) => {
+        // Lógica para guardar los nuevos datos en el backend
+        // ...
+
+        // Actualizar el estado con los nuevos datos si es necesario
+        // setUserData(newUserData);
+
+        handleCloseModal();
+    };
 
     return (
         <div>
             <header className="userHeader">
-                {/* Agregamos el nav */}
                 <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
                     <div className="container-fluid">
                         <a href="/Home" className="Logo">
@@ -88,8 +111,6 @@ const UserInfo = () => {
                 </nav>
             </header>
 
-
-
             <div>
                 <h1>UserInfo</h1>
                 {/* Mostrar datos del usuario en la pantalla */}
@@ -99,18 +120,23 @@ const UserInfo = () => {
                         <p>Nombre: {user.first_name}</p>
                         <p>Apellido: {user.last_name}</p>
                         <p>Número de teléfono: {user.phone_number}</p>
-                        {/* Agrega más campos según sea necesario */}
+                        <p>Estado de usuario: {user.is_active}</p>
                     </div>
                 ))}
             </div>
 
-
             <div>
-                <button className="btn btn-success btn-lg mt-2 w-100 text-center" >Editar usuario</button>
+                <button className="btn btn-success btn-lg mt-2 w-100 text-center" onClick={handleOpenModal}>
+                    Editar usuario
+                </button>
+                <EditUserModal
+                    show={showModal}
+                    handleClose={handleCloseModal}
+                    handleSave={handleSaveChanges}
+                />
             </div>
-
         </div>
-    )
+    );
+};
 
-}
-export default UserInfo
+export default UserInfo;

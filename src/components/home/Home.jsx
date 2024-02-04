@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
+import wcp_logo_t1 from '../image/wcp_logo_t1.png'
 
 
 
@@ -20,7 +21,7 @@ const Home = () => {
     const onSubmit = async (data) => {
         try {
             // Realiza la solicitud al API endpoint
-            const response = await fetch('https://www.worldplus.com.ar/signin', {
+            const response = await fetch('https://worldplus.com.ar/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,6 +33,8 @@ const Home = () => {
                 // Autenticación exitosa, realiza las acciones necesarias
                 const responseData = await response.json();
                 console.log('Autenticación exitosa:', responseData);
+
+                handleToken(responseData.token);
             } else {
                 // Autenticación fallida
                 console.error('Autenticación fallida:', response.statusText);
@@ -42,8 +45,17 @@ const Home = () => {
     };
 
 
-    // analisis tecnico super explicado
-    // analisis fundamental noticias, volumenes, deuda, si pagan terminos, diviendo
+
+
+
+    const handleToken = (token = responseData.token) => {
+        // Almacenar el token en el localStorage
+        localStorage.setItem('token', token);
+        // Actualizar el estado con el token si es necesario
+        setToken(token);
+        // También puedes realizar acciones adicionales aquí según tus necesidades
+        history.push('/UserInfo');
+    };
 
     return (
         <>
@@ -53,7 +65,7 @@ const Home = () => {
             </div>
 
             <header className="container">
-                <img src={LogoFinalWcp} alt="logo" style={{ borderRadius: '180px', marginTop: '20px' }} />
+                <img src={wcp_logo_t1} alt="logo" style={{ borderRadius: '100px', marginTop: '20px' }} />
             </header>
 
             {/* SECTION CREAR CUENTA */}
