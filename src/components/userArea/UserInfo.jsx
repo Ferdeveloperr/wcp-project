@@ -120,85 +120,90 @@ const UserInfo = () => {
 
     return (
         <div>
-            <header className="userHeader">
-                <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
-                    <div className="container-fluid">
-                        <a href="/UserArea" onClick={(evento) => handleClick(evento, '/UserArea')} className="Logo">
-                            <img src={LogoFinalWcp} alt="Logo" height="70px" width="70px" />
-                        </a>
-                        <div className="logoStyle">
-                            <a href="#" onClick={(evento) => handleClick(evento, '/UserArea')} className="navbar-brand">
-                                WorldPlus
+            <div id='userAreaStyle'>
+                <header className="userHeader">
+                    <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
+                        <div className="container-fluid">
+                            <a href="/UserArea" onClick={(evento) => handleClick(evento, '/UserArea')} className="Logo">
+                                <img src={LogoFinalWcp} alt="Logo" height="70px" width="70px" />
                             </a>
-                        </div>
-                        <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav"
-                            aria-controls="navbarNav"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="index.html"></a>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/Terms" className="nav-link">Terminos y condiciones</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/WalletList')}>Mis Billeteras</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserArea')}>Pagina principal</a>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/AccountConfirmation" className="nav-link">Confirmar email</Link>
-                                </li>
-                                <li className="nav-item">
+                            <div className="logoStyle">
+                                <a href="#" onClick={(evento) => handleClick(evento, '/UserArea')} className="navbar-brand">
+                                    WorldPlus
+                                </a>
+                            </div>
+                            <button
+                                className="navbar-toggler"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav"
+                                aria-controls="navbarNav"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+                            <div className="collapse navbar-collapse" id="navbarNav">
+                                <ul className="navbar-nav">
+                                    <li className="nav-item">
+                                        <a className="nav-link active" aria-current="page" href="index.html"></a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/Terms" className="nav-link">Terminos y condiciones</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/WalletList')}>Mis Billeteras</a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserArea')}>Pagina principal</a>
+                                    </li>
+                                    {/* <li className="nav-item">
                                     <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserArea')}>Cambiar contraseña</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#footerSection">
-                                        Pie de pagina
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/Logout')}>Cerrar Sesion</a>
-                                </li>
-                            </ul>
+                                </li> */}
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="#footerSection">
+                                            Pie de pagina
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/Logout')}>Cerrar Sesion</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </header>
+                    </nav>
+                </header>
 
-            <div>
-                <h1>Informacion de usuario</h1>
-                {/* Mostrar datos del usuario en la pantalla */}
-                {userData && userData.map((user) => (
-                    <div key={user.id}>
-                        <p>Email: {user.email_address}</p>
-                        <p>Nombre: {user.first_name}</p>
-                        <p>Apellido: {user.last_name}</p>
-                        <p>Número de teléfono: {user.phone_number}</p>
-                        <p>Estado de usuario: {user.is_active}</p>
-                    </div>
-                ))}
-            </div>
+                <div>
+                    <h1>Informacion de usuario</h1>
+                    {/* Mostrar datos del usuario en la pantalla */}
+                    {userData && userData.map((user) => (
+                        <div key={user.id}>
+                            <p>Email: {user.email_address}</p>
+                            <p>Nombre: {user.first_name}</p>
+                            <p>Apellido: {user.last_name}</p>
+                            <p>Número de teléfono: {user.phone_number}</p>
+                            <p>Estado de usuario: {user.is_active}</p>
+                        </div>
+                    ))}
+                </div>
 
-            <div>
-                <button className="btn btn-success btn-lg mt-2 w-100 text-center" onClick={handleOpenModal}>
-                    Editar usuario
-                </button>
-                <EditUserModal
-                    show={showModal}
-                    handleClose={handleCloseModal}
-                    handleSave={handleSaveChanges}
-                />
+                <div>
+                    <button className="btn btn-success btn-lg mt-2 w-100 text-center" onClick={handleOpenModal}>
+                        Editar usuario
+                    </button>
+                    {/* <button className="btn btn-success btn-lg mt-2 w-100 text-center" onClick={handleOpenModal}>
+                    Confirmar email
+                </button> */}
+                    {/* <button className="btn btn-success btn-lg mt-2 w-100 text-center" onClick={handleOpenModal}>
+                    Cambiar contraseña
+                </button> */}
+                    <EditUserModal
+                        show={showModal}
+                        handleClose={handleCloseModal}
+                        handleSave={handleSaveChanges}
+                    />
+                </div>
             </div>
         </div>
     );

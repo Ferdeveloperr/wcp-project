@@ -129,7 +129,7 @@ const UserArea = () => {
 
 
 
-    // SE ALMACENA TOKEN Y SE GUARDA EN EL SESSION 
+    // SE ALMACENA TOKEN Y SE GUARDA EN EL SESSION
     let saved_token = sessionStorage.getItem('token');
     let tkn = 'Bearer ' + saved_token;
 
@@ -165,148 +165,149 @@ const UserArea = () => {
     return (
 
         <div>
-            {/* U S E R  A R E A */}
-            <header className="userHeader">
-                {/* Agregamos el nav */}
-                <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
-                    <div className="container-fluid">
-                        <a href="/UserArea" className="Logo">
-                            <img src={LogoFinalWcp} alt="Logo" height="70px" width="70px" />
-                        </a>
-                        <div className="logoStyle">
-                            <a className="navbar-brand" href="/UserArea">
-                                WorldPlus
+            <div id='userAreaStyle'>
+                {/* U S E R  A R E A */}
+                <header className="userHeader">
+                    {/* Agregamos el nav */}
+                    <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
+                        <div className="container-fluid">
+                            <a href="/UserArea" className="Logo">
+                                <img src={LogoFinalWcp} alt="Logo" height="70px" width="70px" />
                             </a>
-                        </div>
-                        <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav"
-                            aria-controls="navbarNav"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="index.html"></a>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/Terms" className="nav-link">Terminos y condiciones</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/WalletList')}>Mis Billeteras</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserInfo')}>Informacion de usuario</a>
-                                </li>
-                                <li className="nav-item">
+                            <div className="logoStyle">
+                                <a className="navbar-brand" href="/UserArea">
+                                    WorldPlus
+                                </a>
+                            </div>
+                            <button
+                                className="navbar-toggler"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav"
+                                aria-controls="navbarNav"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+                            <div className="collapse navbar-collapse" id="navbarNav">
+                                <ul className="navbar-nav">
+                                    <li className="nav-item">
+                                        <a className="nav-link active" aria-current="page" href="index.html"></a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/Terms" className="nav-link">Terminos y condiciones</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/WalletList')}>Mis Billeteras</a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserInfo')}>Informacion de usuario</a>
+                                    </li>
+                                    {/* <li className="nav-item">
                                     <Link to="/AccountConfirmation" className="nav-link">Confirmar email</Link>
-                                </li>
-                                <li className="nav-item">
+                                </li> */}
+                                    {/* <li className="nav-item">
                                     <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserInfo')}>Cambiar contraseña</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#footerSection">
-                                        Pie de pagina
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/Logout')}>Cerrar Sesion</a>
-                                </li>
-                            </ul>
+                                </li> */}
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="#footerSection">
+                                            Pie de pagina
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/Logout')}>Cerrar Sesion</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </header>
+                    </nav>
+                </header>
 
-            <div className="app-container">
+                <div className="app-container">
 
-                {/* SECCION DE TITULO Y SUBTITLO */}
-                <section className="titleSection">
+                    {/* SECCION DE TITULO Y SUBTITLO */}
+                    <section className="titleSection">
 
-                    <div>
-                        <h1>
-                            ¡Bienvenido!
-                        </h1>
-                    </div>
-                    <div>
-                        <h4>
-                            En el video a continuacion encontrara los pasos a seguir
-                        </h4>
-                    </div>
-                </section>
-
-                <div className="videoStyle">
-                    <video src={videoPruebaaa} controls width="300"></video>
-                </div>
-
-                {/* Linea divisoria */}
-                <hr className="custom-hr" />
-
-                <section>
-                    <div className="user-area">
-                        <h4 className="tittleUserArea">Ingrese la cantidad de monedas que utilizará para ver sus ganancias</h4>
-                        <div className="form-floating mb-3 d-flex flex-column align-items-center">
-                            <label htmlFor="floatingNumberr"></label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                id="floatingNumberr"
-                                placeholder="Ingrese la cantidad de monedas"
-                                ref={inputCantidadRef}
-                            />
+                        <div>
+                            <h1>
+                                ¡Bienvenido!
+                            </h1>
                         </div>
+                        <div>
+                            <h4>
+                                En el video a continuacion encontrara los pasos a seguir
+                            </h4>
+                        </div>
+                    </section>
+
+                    <div className="videoStyle">
+                        <video src={videoPruebaaa} controls width="300"></video>
                     </div>
 
-                    {/* Button trigger modal */}
-                    <div className="text-center">
-                        <button
-                            type="button"
-                            className="btn btn-success btn-lg mt-2 w-100"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            onClick={mostrarCantidad}
+                    {/* Linea divisoria */}
+                    <hr className="custom-hr" />
+
+                    <section>
+                        <div className="user-area">
+                            <h4 className="tittleUserArea">Ingrese la cantidad de monedas que utilizará para ver sus ganancias</h4>
+                            <div className="form-floating mb-3 d-flex flex-column align-items-center">
+                                <label htmlFor="floatingNumberr"></label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="floatingNumberr"
+                                    placeholder="Ingrese la cantidad de monedas"
+                                    ref={inputCantidadRef}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Button trigger modal */}
+                        <div className="text-center">
+                            <button
+                                type="button"
+                                className="btn btn-success btn-lg mt-2 w-100"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                onClick={mostrarCantidad}
+                            >
+                                OK
+                            </button>
+                        </div>
+
+                        {/* Modal  */}
+                        <div
+                            className="modal fade"
+                            id="exampleModal"
+                            tabIndex="-1"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
                         >
-                            OK
-                        </button>
-                    </div>
-
-                    {/* Modal  */}
-                    <div
-                        className="modal fade"
-                        id="exampleModal"
-                        tabIndex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h1 className="modal-title fs-5" id="exampleModalLabel">
-                                        Operacion confirmada.
-                                    </h1>
-                                    <button
-                                        type="button"
-                                        className="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
-                                </div>
-                                <div className="modal-body d-flex align-items-center justify-content-center">
-                                    <div className="text-center">
-                                        <img src={check} alt="imagenDeUsuario" className="mb-3" />
-                                        <p className="mb-1 fs-5">
-                                            La cantidad ingresada es: <span id="cantidadMonedas">{cantidadMonedas}</span> WLD
-                                        </p>
-                                        <p className="mb-1 fs-5">Rendimiento: 10WLD</p>
-                                        <p className="mb-1 fs-5">Bonos: Quincenalmente</p>
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                            Operacion confirmada.
+                                        </h1>
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                        ></button>
                                     </div>
-                                </div>
-                                {/* <div className="modal-footer">
+                                    <div className="modal-body d-flex align-items-center justify-content-center">
+                                        <div className="text-center">
+                                            <img src={check} alt="imagenDeUsuario" className="mb-3" />
+                                            <p className="mb-1 fs-5">
+                                                La cantidad ingresada es: <span id="cantidadMonedas">{cantidadMonedas}</span> WLD
+                                            </p>
+                                            <p className="mb-1 fs-5">Rendimiento: 10WLD</p>
+                                            <p className="mb-1 fs-5">Bonos: Quincenalmente</p>
+                                        </div>
+                                    </div>
+                                    {/* <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                                     Cerrar
                                 </button>
@@ -319,156 +320,157 @@ const UserArea = () => {
                                     Copiar link
                                 </button>
                             </div> */}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-
-                <section className='UserAreaSectionText'>
-
-                    <br></br>
-                    <h4 className="tittleUserArea">Ingrese ID de transaccion</h4>
-                    <div className="form-floating mb-3 d-flex flex-column align-items-center">
-                        <label htmlFor="floatingNumberr"></label>
-                        <input type="text" className="form-control" id="transaccionId"
-                            placeholder="Ingrese la dirección de su wallet" />
-                    </div>
-
-                    <button
-                        type="button"
-                        className="btn btn-success btn-lg mt-2 w-100"
-                        onClick={handleTransactionId}
-                    >
-                        OK
-                    </button>
-
-                </section>
-
-
-
-                {/* SECCION DE TIMER */}
-
-
-
-                <div className='timerEstatico'>
-                    <h2 className='tituloEstatico'>
-                        Tiempo estimado de procesamiento
-                    </h2>
-
-
-
-                    <h5>
-                        El tiempo estimado que demora su transaccion sera de 3 a 5 dias habiles
-                    </h5>
-
-                    <br />
-
-                    <h6>Tenga en cuenta que si no se registra Operacion realizada el tiempo estimado queda sin efecto</h6>
-                </div>
-
-
-
-
-
-                {/* SECCION INGRESO WALLET */}
-
-
-
-
-                <div className="walletStyle">
-                    <h3>
-                        Recuerde ingresar su wallet en el menu superior dentro de la seccion "Mis Billeteras"
-                    </h3>
-
-                    <div className="walletStyleImg">
-                        <img src={logoWorldcoinApi} alt="" />
-                    </div>
-                </div>
-
-                <hr className="custom-hr"></hr>
-
-                {/* SECCION DE COTIZACIONES DE CRYPTO */}
-                <div>
-                    <h3 className="TextCotizacion">Cotizacion cripto</h3>
-                </div>
-                <section className="sectionCrypto">
-                    <div className="containerCrypto">
-                        <div className="coin-price">
-                            <div className="log"><img src={logoBitcoinDos} alt="Bitcoin" height="150px" width="150px" /></div>
-                            <div>
-                                <h1> $<span id="bitcoin"></span></h1>
-                                <h1>Bitcoin</h1>
-                            </div>
-                        </div>
-
-                        <div className="coin-price">
-                            <div className="log"><img src={EthereumLogoWine} alt="Ethereum" height="150px" width="150px" /></div>
-                            <div>
-                                <h1> $<span id="ethereum"></span></h1>
-                                <h1>Ethereum</h1>
-                            </div>
-                        </div>
-
-                        <div className="coin-price">
-                            <div className="img-responsive"><img src={logoWorldcoinApi} alt="Worldcoin" height="60px" width="60px" /></div>
-                            <div>
-                                <h1> $<span id="worldcoin"></span></h1>
-                                <h1>Worldcoin</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-
-
-                {/* SECCION DE VIDEO TUTORIAL */}
-                <hr className="custom-hr" />
-
-
-                <section className="titleSectionDos">
-                    <h2>
-                        Tutorial para cambiar tus criptomonedas
-                    </h2>
-
-                    <br />
-
-                    <h5>
-                        Siga los pasos que se muestran en el video a continuacion
-                    </h5>
-
-                </section>
-
-
-                <div className="videoStyle">
-                    <video src={tutorialWld} controls width="300"></video>
-                </div>
-
-                <hr className="custom-hr" />
-                {/* F O O T E R  */}
-
-                <section id="footerSection">
-                    <footer className="bg-black text-white py-4 mt-2">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-4">
-                                    <p><a href="/Terms" target="_blank" className="text-white">Términos y Condiciones</a></p>
-                                </div>
-                                <div className="col-lg-4">
-                                    <p>Derechos Reservados &copy; 2024 WorldPlus</p>
-                                </div>
-                                <div className="col-lg-4">
-                                    <p><a href="https://wa.me/tunumero" className="text-white" target="_blank">Área de Soporte
-                                    </a></p>
                                 </div>
                             </div>
                         </div>
-                    </footer>
-                </section>
+                    </section>
 
 
+
+                    <section className='UserAreaSectionText'>
+
+                        <br></br>
+                        <h4 className="tittleUserArea">Ingrese ID de transaccion</h4>
+                        <div className="form-floating mb-3 d-flex flex-column align-items-center">
+                            <label htmlFor="floatingNumberr"></label>
+                            <input type="text" className="form-control" id="transaccionId"
+                                placeholder="Ingrese la dirección de su wallet" />
+                        </div>
+
+                        <button
+                            type="button"
+                            className="btn btn-success btn-lg mt-2 w-100"
+                            onClick={handleTransactionId}
+                        >
+                            OK
+                        </button>
+
+                    </section>
+
+
+
+                    {/* SECCION DE TIMER */}
+
+
+
+                    <div className='timerEstatico'>
+                        <h2 className='tituloEstatico'>
+                            Tiempo estimado de procesamiento
+                        </h2>
+
+
+
+                        <h5>
+                            El tiempo estimado que demora su transaccion sera de 3 a 5 dias habiles
+                        </h5>
+
+                        <br />
+
+                        <h6>Tenga en cuenta que si no se registra Operacion realizada el tiempo estimado queda sin efecto</h6>
+                    </div>
+
+
+
+
+
+                    {/* SECCION INGRESO WALLET */}
+
+
+
+
+                    <div className="walletStyle">
+                        <h3>
+                            Recuerde ingresar su wallet en el menu superior dentro de la seccion "Mis Billeteras"
+                        </h3>
+
+                        <div className="walletStyleImg">
+                            <img src={logoWorldcoinApi} alt="" />
+                        </div>
+                    </div>
+
+                    <hr className="custom-hr"></hr>
+
+                    {/* SECCION DE COTIZACIONES DE CRYPTO */}
+                    <div>
+                        <h3 className="TextCotizacion">Cotizacion cripto</h3>
+                    </div>
+                    <section className="sectionCrypto">
+                        <div className="containerCrypto">
+                            <div className="coin-price">
+                                <div className="log"><img src={logoBitcoinDos} alt="Bitcoin" height="150px" width="150px" /></div>
+                                <div>
+                                    <h1> $<span id="bitcoin"></span></h1>
+                                    <h1>Bitcoin</h1>
+                                </div>
+                            </div>
+
+                            <div className="coin-price">
+                                <div className="log"><img src={EthereumLogoWine} alt="Ethereum" height="150px" width="150px" /></div>
+                                <div>
+                                    <h1> $<span id="ethereum"></span></h1>
+                                    <h1>Ethereum</h1>
+                                </div>
+                            </div>
+
+                            <div className="coin-price">
+                                <div className="img-responsive"><img src={logoWorldcoinApi} alt="Worldcoin" height="60px" width="60px" /></div>
+                                <div>
+                                    <h1> $<span id="worldcoin"></span></h1>
+                                    <h1>Worldcoin</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+                    {/* SECCION DE VIDEO TUTORIAL */}
+                    <hr className="custom-hr" />
+
+
+                    <section className="titleSectionDos">
+                        <h2>
+                            Tutorial para cambiar tus criptomonedas
+                        </h2>
+
+                        <br />
+
+                        <h5>
+                            Siga los pasos que se muestran en el video a continuacion
+                        </h5>
+
+                    </section>
+
+
+                    <div className="videoStyle">
+                        <video src={tutorialWld} controls width="300"></video>
+                    </div>
+
+                    <hr className="custom-hr" />
+                    {/* F O O T E R  */}
+
+                    <section id="footerSection">
+                        <footer className="bg-black text-white py-4 mt-2">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-lg-4">
+                                        <p><a href="/Terms" target="_blank" className="text-white">Términos y Condiciones</a></p>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <p>Derechos Reservados &copy; 2024 WorldPlus</p>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <p><a href="https://wa.me/tunumero" className="text-white" target="_blank">Área de Soporte
+                                        </a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+
+
+                </div>
             </div>
         </div>
 

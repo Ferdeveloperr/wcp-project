@@ -38,37 +38,7 @@ const ForgotPassword = () => {
     };
 
 
-    let saved_token = sessionStorage.getItem('token');
-    let tkn = 'Bearer ' + saved_token;
 
-    const navigate = useNavigate();
-
-    const handleClick = async (e, pagina) => {
-        e.preventDefault;
-        try {
-            await fetch('http://localhost:8000/refresh-token', {
-                method: 'GET',
-                headers: {
-                    'Authorization': tkn,
-                    'Content-Type': 'application/json',
-                },
-            }).then((response) => {
-                if (response.status == 200) {
-                    response.json().then((res) => {
-                        let token = res.access_token;
-                        sessionStorage.setItem('token', token);
-                    })
-                } else {
-                    navigate('/403');
-                }
-            })
-                .then(() => {
-                    navigate(pagina);
-                })
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
 
     return (
         <div>

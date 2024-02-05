@@ -9,6 +9,8 @@
 
 
 body {
+
+
     margin: 0;
     font-family: 'Inria Serif', serif;
 }
@@ -21,13 +23,20 @@ header {
     padding: 20px 0;
 }
 
-.containerTop {
+#containerTop {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: #fff;
     background-color: black;
+
+}
+
+.titleDif {
+    display: flex;
+    justify-content: center;
 }
 
 .container {
@@ -209,10 +218,17 @@ input[type="checkbox"] {
 /* ESTILOS DEL USER AREA */
 
 
+.userAreaStyle {
+    display: flex;
+    justify-content: center;
+    max-width: 670px;
+}
+
 .UserAreaSectionText {
 
     margin-bottom: 100px;
     margin-top: 100px;
+
 
 }
 
@@ -266,57 +282,6 @@ video {
 }
 
 
-/* ESTILOS TIMER ESTATICO */
-
-
-.timerEstatico {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-
-}
-
-.tituloEstatico {
-    margin-bottom: 60px;
-}
-
-
-
-
-
-
-/* Estilos timer */
-
-
-.timerStyle {
-    font-family: 'Arial', sans-serif;
-    margin-top: 90px;
-    align-items: center;
-    justify-content: center;
-    height: 35vh;
-    background-color: #fff;
-    color: #000;
-}
-
-.timerAcreditacion {
-
-    justify-content: center;
-    text-align: center;
-
-
-}
-
-
-.timer-container {
-    text-align: center;
-}
-
-
-.countdown {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
 
 /* Estilos hr */
 

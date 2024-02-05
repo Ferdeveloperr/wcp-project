@@ -8,6 +8,8 @@ const WalletList = () => {
     const [showOptions, setShowOptions] = useState(false);
     const [wallets, setWallets] = useState([]);
     const [newWallet, setNewWallet] = useState('');
+    const [coinName, setCoinName] = useState('');
+    const [shortName, setShortName] = useState('');
 
 
     const toggleOptions = () => {
@@ -65,10 +67,22 @@ const WalletList = () => {
                     // Actualizar las wallets después de agregar una nueva
                     fetchWalletsFromBackend();
                     // Limpiar el input de nueva wallet
+
+                    const newWalletObj = {
+                        name: newWallet,
+                        coinName: coinName,
+                        shortName: shortName,
+                    };
+
+                    // Actualizar el estado de wallets
+                    setWallets([...wallets, newWalletObj]);
+
+                    // Limpiar los campos después de agregar la wallet
                     setNewWallet('');
-                } else {
-                    console.error('Error al agregar la nueva wallet en el backend');
-                }
+                    setCoinName('');
+                    setShortName('');
+                };
+
             } else {
                 console.error('No hay token en sessionStorage');
             }
@@ -144,6 +158,9 @@ const WalletList = () => {
                 <h2>Mis Wallets</h2>
             </div>
 
+
+
+
             <div className="container text-center">
                 <button className="btn btn-dark mb-3" onClick={toggleOptions}>
                     Opciones
@@ -151,34 +168,62 @@ const WalletList = () => {
 
                 {showOptions && (
                     <div className="mb-3">
-                        {/* Borrar Wallets */}
-                        {wallets.map((wallet, index) => (
-                            <div key={index} className="d-flex justify-content-between align-items-center mb-2">
-                                <span>{wallet.name}</span>
-                                <button className="btn btn-danger" onClick={() => removeWallet(index)}>
-                                    Borrar Wallet
-                                </button>
-                            </div>
-                        ))}
+                        <form>
+                            {wallets.map((wallet, index) => (
+                                <div key={index} className="d-flex justify-content-between align-items-center mb-2">
+                                    <span>{wallet.name}</span>
+                                    <button type="button" className="btn btn-danger" onClick={() => removeWallet(index)}>
+                                        Borrar Wallet
+                                    </button>
+                                </div>
+                            ))}
 
-                        <input
-                            type="text"
-                            className="form-control mb-2"
-                            placeholder="Nueva Wallet"
-                            value={newWallet}
-                            onChange={(e) => setNewWallet(e.target.value)}
-                        />
-                        <button className="btn btn-success mb-2" onClick={addWallet}>
-                            Agregar Wallet
-                        </button>
+                            <div className="mb-2">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Nueva Wallet"
+                                    value={newWallet}
+                                    onChange={(e) => setNewWallet(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="mb-2">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Coin name"
+                                    value={coinName}
+                                    onChange={(e) => setCoinName(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="mb-2">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Short name"
+                                    value={shortName}
+                                    onChange={(e) => setShortName(e.target.value)}
+                                />
+                            </div>
+
+                            <button type="button" className="btn btn-success" onClick={addWallet}>
+                                Agregar Wallet
+                            </button>
+                        </form>
+
                     </div>
                 )}
             </div>
+
 
             <Link to="/UserArea" className="btn btn-dark mb-3">
                 Volver
             </Link>
         </div>
+
+
     );
 };
 
