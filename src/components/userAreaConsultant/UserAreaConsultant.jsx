@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
 import QRCode from 'qrcode';
 
@@ -43,6 +43,39 @@ const UserAreaConsultant = () => {
         // Mostramos el contenedor del QR
         setShowQR(true);
     };
+
+
+    let saved_token = sessionStorage.getItem('token');
+    let tkn = 'Bearer ' + saved_token;
+
+    const navigate = useNavigate();
+
+    const handleClick = async (e, pagina) => {
+        e.preventDefault;
+        try {
+            await fetch('http://localhost:8000/refresh-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': tkn,
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                if (response.status == 200) {
+                    response.json().then((res) => {
+                        let token = res.access_token;
+                        sessionStorage.setItem('token', token);
+                    })
+                } else {
+                    navigate('/403');
+                }
+            })
+                .then(() => {
+                    navigate(pagina);
+                })
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
 
     return (
@@ -134,32 +167,7 @@ const UserAreaConsultant = () => {
 
             <hr className="custom-hr" />
 
-            <section className="sectionAdminDos">
-                <div>
-                    <h2>Lista de usuarios</h2>
-                </div>
 
-                <div className="textUsuarios">
-                    <h4>Buscar usuario</h4>
-                    <p>response id xxxx</p>
-                </div>
-                <div>
-                    <h4>Nombre usuario</h4>
-                    <p>response username...</p>
-                </div>
-                <div>
-                    <h4>Datos usuario</h4>
-                    <p>response objectform....</p>
-                </div>
-                <div>
-                    <h4>Wallets usuario</h4>
-                    <p>response Addwallet.value.id ...</p>
-                </div>
-                <div>
-                    <h4>Editar wallet usuario</h4>
-                    <p>Estado: xxxx</p>
-                </div>
-            </section>
 
             <hr className="custom-hr" />
 

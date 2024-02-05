@@ -1,5 +1,13 @@
 /* ESTILOS DE INDEX -- HEADER */
 
+/* UserInfo.css */
+.app-container {
+    max-width: 670px;
+    margin: 0 auto;
+    /* Centra el contenedor en la página */
+}
+
+
 body {
     margin: 0;
     font-family: 'Inria Serif', serif;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import EditUserModal from '../userArea/EditModal';
 
 const UserInfo = () => {
@@ -12,7 +12,7 @@ const UserInfo = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const token = localStorage.getItem('token');
+                const token = sessionStorage.getItem('token');
 
                 if (token) {
                     const response = await fetch('https://worldplus.com.ar/api/users/me', {
@@ -31,7 +31,7 @@ const UserInfo = () => {
                         console.error('Error al obtener datos del usuario:', response.statusText);
                     }
                 } else {
-                    console.error('No hay token en localStorage');
+                    console.error('No hay token en sessionStorage');
                 }
             } catch (error) {
                 console.error('Error al cargar datos del usuario:', error);
@@ -49,9 +49,13 @@ const UserInfo = () => {
         setShowModal(false);
     };
 
+
+
+
+    // PETICION DE DATOS DEL USUARIO AL BACKEND
     const handleSaveChanges = async (newData) => {
         try {
-            const token = localStorage.getItem('token');
+            const token = sessionStorage.getItem('token');
 
             if (token) {
                 const response = await fetch('https://worldplus.com.ar/api/users/me', {
@@ -72,7 +76,7 @@ const UserInfo = () => {
                     console.error('Error al guardar cambios:', response.statusText);
                 }
             } else {
-                console.error('No hay token en localStorage');
+                console.error('No hay token en sessionStorage');
             }
         } catch (error) {
             console.error('Error al guardar cambios:', error);
@@ -81,16 +85,49 @@ const UserInfo = () => {
         handleCloseModal(); console.log(handleCloseModal)
     };
 
+
+    let saved_token = sessionStorage.getItem('token');
+    let tkn = 'Bearer ' + saved_token;
+
+    const navigate = useNavigate();
+
+    const handleClick = async (e, pagina) => {
+        e.preventDefault;
+        try {
+            await fetch('http://localhost:8000/refresh-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': tkn,
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                if (response.status == 200) {
+                    response.json().then((res) => {
+                        let token = res.access_token;
+                        sessionStorage.setItem('token', token);
+                    })
+                } else {
+                    navigate('/403');
+                }
+            })
+                .then(() => {
+                    navigate(pagina);
+                })
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     return (
         <div>
             <header className="userHeader">
                 <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
                     <div className="container-fluid">
-                        <a href="/Home" className="Logo">
+                        <a href="/UserArea" onClick={(evento) => handleClick(evento, '/UserArea')} className="Logo">
                             <img src={LogoFinalWcp} alt="Logo" height="70px" width="70px" />
                         </a>
                         <div className="logoStyle">
-                            <a className="navbar-brand" href="/UserArea">
+                            <a href="#" onClick={(evento) => handleClick(evento, '/UserArea')} className="navbar-brand">
                                 WorldPlus
                             </a>
                         </div>
@@ -114,10 +151,16 @@ const UserInfo = () => {
                                     <Link to="/Terms" className="nav-link">Terminos y condiciones</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/WalletList" className="nav-link">Mis Billeteras</Link>
+                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/WalletList')}>Mis Billeteras</a>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/ForgotPassword" className="nav-link">Recuperar contraseña</Link>
+                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserArea')}>Pagina principal</a>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/AccountConfirmation" className="nav-link">Confirmar email</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/UserArea')}>Cambiar contraseña</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#footerSection">
@@ -125,7 +168,7 @@ const UserInfo = () => {
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/Home" className="nav-link">Cerrar Sesion</Link>
+                                    <a href="#" className="nav-link" onClick={(evento) => handleClick(evento, '/Logout')}>Cerrar Sesion</a>
                                 </li>
                             </ul>
                         </div>

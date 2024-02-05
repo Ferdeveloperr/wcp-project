@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logoPruebaa from '../image/logoPruebaa.png';
@@ -36,6 +36,39 @@ const ForgotPassword = () => {
             setMessage('Error inesperado. Por favor, inténtalo de nuevo.');
         }
     };
+
+
+    let saved_token = sessionStorage.getItem('token');
+    let tkn = 'Bearer ' + saved_token;
+
+    const navigate = useNavigate();
+
+    const handleClick = async (e, pagina) => {
+        e.preventDefault;
+        try {
+            await fetch('http://localhost:8000/refresh-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': tkn,
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                if (response.status == 200) {
+                    response.json().then((res) => {
+                        let token = res.access_token;
+                        sessionStorage.setItem('token', token);
+                    })
+                } else {
+                    navigate('/403');
+                }
+            })
+                .then(() => {
+                    navigate(pagina);
+                })
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     return (
         <div>
@@ -76,7 +109,7 @@ const ForgotPassword = () => {
                     </div>
 
                     <button type="submit" className="btn btn-dark btn-lg">
-                        Cambiar contraseña
+                        Recuperar contraseña
                     </button>
                 </form>
 

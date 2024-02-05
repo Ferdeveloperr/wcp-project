@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../../App.css';
@@ -21,7 +21,7 @@ const WalletList = () => {
 
     const fetchWalletsFromBackend = async () => {
         try {
-            const token = localStorage.getItem('token');
+            const token = sessionStorage.getItem('token');
 
             if (token) {
                 // Realizar la solicitud al backend para obtener las wallets del usuario
@@ -39,7 +39,7 @@ const WalletList = () => {
                     console.error('Error al obtener las wallets del backend');
                 }
             } else {
-                console.error('No hay token en localStorage');
+                console.error('No hay token en sessionStorage');
             }
         } catch (error) {
             console.error('Error en la solicitud al backend:', error);
@@ -48,7 +48,7 @@ const WalletList = () => {
 
     const addWallet = async () => {
         try {
-            const token = localStorage.getItem('token');
+            const token = sessionStorage.getItem('token');
 
             if (token) {
                 // Realizar la solicitud al backend para agregar una nueva wallet
@@ -70,7 +70,7 @@ const WalletList = () => {
                     console.error('Error al agregar la nueva wallet en el backend');
                 }
             } else {
-                console.error('No hay token en localStorage');
+                console.error('No hay token en sessionStorage');
             }
         } catch (error) {
             console.error('Error en la solicitud al backend:', error);
@@ -79,7 +79,7 @@ const WalletList = () => {
 
     const removeWallet = async (index) => {
         try {
-            const token = localStorage.getItem('token');
+            const token = sessionStorage.getItem('token');
 
             if (token) {
                 // Realizar la solicitud al backend para eliminar una wallet
@@ -97,12 +97,45 @@ const WalletList = () => {
                     console.error('Error al eliminar la wallet en el backend');
                 }
             } else {
-                console.error('No hay token en localStorage');
+                console.error('No hay token en sessionStorage');
             }
         } catch (error) {
             console.error('Error en la solicitud al backend:', error);
         }
     };
+
+
+    let saved_token = sessionStorage.getItem('token');
+    let tkn = 'Bearer ' + saved_token;
+
+    const navigate = useNavigate();
+
+    const handleClick = async (e, pagina) => {
+        e.preventDefault;
+        try {
+            await fetch('http://localhost:8000/refresh-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': tkn,
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                if (response.status == 200) {
+                    response.json().then((res) => {
+                        let token = res.access_token;
+                        sessionStorage.setItem('token', token);
+                    })
+                } else {
+                    navigate('/403');
+                }
+            })
+                .then(() => {
+                    navigate(pagina);
+                })
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
 
     return (

@@ -3,14 +3,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import usuarioGenericoDos from '../image/usuarioGenericoDos.png';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { Redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+
 
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const [token, setToken] = useState('');
+
 
     const onSubmit = async (data) => {
         try {
@@ -28,7 +30,24 @@ const SignUp = () => {
                 const token = await response.json();
                 console.log('Datos enviados al backend:', token);
 
-                handleToken(token.token);
+
+
+
+                // ***********************************
+                // *  TOKEN GUARDADO SESSION STORAGE *
+                // * *********************************
+
+
+                sessionStorage.setItem('token', token.token);
+
+
+
+                // Alerta de creacion de usuario exitoso
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    text: 'Se ha registrado correctamente',
+                });
 
             } else {
                 console.error('Error al enviar los datos al backend:', response.statusText);
@@ -43,18 +62,40 @@ const SignUp = () => {
 
     };
 
-    // const history = useHistory();
 
 
 
-    const handleToken = (token = token) => {
-        // Almacenar el token en el localStorage
-        localStorage.setItem('token', token);
-        // Actualizar el estado con el token si es necesario
-        setToken(token);
-        // También puedes realizar acciones adicionales aquí según tus necesidades
-        // history.push('/UserInfo');
-    };
+    let saved_token = sessionStorage.getItem('token');
+    let tkn = 'Bearer ' + saved_token;
+
+    const navigate = useNavigate();
+
+    const handleClick = async (e, pagina) => {
+        e.preventDefault;
+        try {
+            await fetch('http://localhost:8000/refresh-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': tkn,
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                if (response.status == 200) {
+                    response.json().then((res) => {
+                        let token = res.access_token;
+                        sessionStorage.setItem('token', token);
+                    })
+                } else {
+                    navigate('/403');
+                }
+            })
+                .then(() => {
+                    navigate(pagina);
+                })
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
 
     return (
@@ -104,7 +145,7 @@ const SignUp = () => {
                             id="floatingPhone"
                             placeholder="Telefono"
                             {...register('phone', {
-                                required: 'Este campo es requerido',
+
                                 pattern: {
                                     value: /^\d{10}$/i,
                                     message: 'Ingrese un número de teléfono válido (10 dígitos)'
@@ -155,7 +196,7 @@ const SignUp = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-dark btn-lg">Enviar</button>
+                    <button type="submit" className="btn btn-dark btn-lg mb-3" >Registrarse</button>
                 </form>
             </section>
 

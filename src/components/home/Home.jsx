@@ -1,19 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import LogoFinalWcp from '../image/LogoFinalWcp.jpeg';
+import { Link, useNavigate } from 'react-router-dom';
 import wcp_logo_t1 from '../image/wcp_logo_t1.png'
-
 
 
 const Home = () => {
 
-
-
-
     //FETCH CON URL DEL BACKEND
-
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -34,7 +28,17 @@ const Home = () => {
                 const responseData = await response.json();
                 console.log('Autenticación exitosa:', responseData);
 
-                handleToken(responseData.token);
+
+
+                // ***********************************
+                // *  TOKEN GUARDADO SESSION STORAGE *
+                // * *********************************
+
+
+                sessionStorage.setItem('token', token.token);
+
+
+
             } else {
                 // Autenticación fallida
                 console.error('Autenticación fallida:', response.statusText);
@@ -48,93 +52,124 @@ const Home = () => {
 
 
 
-    const handleToken = (token = responseData.token) => {
-        // Almacenar el token en el localStorage
-        localStorage.setItem('token', token);
-        // Actualizar el estado con el token si es necesario
-        setToken(token);
-        // También puedes realizar acciones adicionales aquí según tus necesidades
-        history.push('/UserInfo');
-    };
+
+    let saved_token = sessionStorage.getItem('token');
+    let tkn = 'Bearer ' + saved_token;
+
+    const navigate = useNavigate();
+
+    const handleClick = async (e, pagina) => {
+        e.preventDefault;
+        try {
+            await fetch('http://localhost:8000/refresh-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': tkn,
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                if (response.status == 200) {
+                    response.json().then((res) => {
+                        let token = res.access_token;
+                        sessionStorage.setItem('token', token);
+                    })
+                } else {
+                    navigate('/403');
+                }
+            })
+                .then(() => {
+                    navigate(pagina);
+                })
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+
+
 
     return (
         <>
-            {/* LANDING PAGE */}
-            <div className="containerTop">
-                <p>WORLDPLUS</p>
-            </div>
+            <div className="app-container">
+                {/* LANDING PAGE */}
+                <div className="containerTop">
+                    <p>WORLDPLUS</p>
+                </div>
 
-            <header className="container">
-                <img src={wcp_logo_t1} alt="logo" style={{ borderRadius: '100px', marginTop: '20px' }} />
-            </header>
+                <header className="container">
+                    <img src={wcp_logo_t1} alt="logo" style={{ borderRadius: '100px', marginTop: '20px' }} />
+                </header>
 
-            {/* SECTION CREAR CUENTA */}
-            <section>
-                <div className="mainButton">
-                    <h1 className="d-flex justify-content-center">
-                        <div className="d-grid gap-2">
-                            <Link to="/SignUp" className="btn btn-dark btn-lg custom-btn-width">Crear Cuenta</Link>
+                {/* SECTION CREAR CUENTA */}
+                <section>
+                    <div className="mainButton">
+                        <h1 className="d-flex justify-content-center">
+                            <div className="d-grid gap-2">
+                                <Link to="/SignUp" className="btn btn-dark btn-lg custom-btn-width">Crear Cuenta</Link>
+                            </div>
+                        </h1>
+                    </div>
+
+                    <div className="mainText">
+                        <p className="mainP">Registrate y obtene tus 10 monedas extra </p>
+                    </div>
+                </section>
+
+                {/* ZONA DE USUARIOS */}
+                <section>
+                    <h3 className="userZone">Usuarios</h3>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+
+                        <div className="form-floating mb-3">
+                            <label htmlFor="floatingInput"><b>Email</b></label>
+                            <input
+                                type="email"
+                                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                                id="floatingInput"
+                                placeholder="Ingrese su direccion de correo electronico"
+                                {...register('email', { required: true })}
+                            />
+                            {errors.email && <div className="invalid-feedback">Este campo es requerido.</div>}
                         </div>
-                    </h1>
-                </div>
 
-                <div className="mainText">
-                    <p className="mainP">Registrate y obtene tus 10 monedas extra </p>
-                </div>
-            </section>
+                        <div className="form-floating mb-3">
+                            <label htmlFor="floatingPassword"><b>Contraseña</b></label>
+                            <input
+                                type="password"
+                                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                                id="floatingPassword"
+                                placeholder="Ingrese su contraseña"
+                                {...register('password', { required: true })}
+                            />
+                            {errors.password && <div className="invalid-feedback">Este campo es requerido.</div>}
+                        </div>
+                        <div className="row justify-content-center">
 
-            {/* ZONA DE USUARIOS */}
-            <section>
-                <h3 className="userZone">Usuarios</h3>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                            <button type="submit" className="btn btn-dark btn-lg mb-3" onClick={(evento) => handleClick(evento, '/UserArea')}>Ingresar</button>
 
-                    <div className="form-floating mb-3">
-                        <label htmlFor="floatingInput"><b>Email</b></label>
-                        <input
-                            type="email"
-                            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                            id="floatingInput"
-                            placeholder="Ingrese su direccion de correo electronico"
-                            {...register('email', { required: true })}
-                        />
-                        {errors.email && <div className="invalid-feedback">Este campo es requerido.</div>}
+                        </div>
+                    </form>
+
+                    <div className="buttonFormMain">
+                        <Link to="/UserArea" className="btn btn-dark btn-lg">Visitante</Link>
                     </div>
+                </section>
 
-                    <div className="form-floating mb-3">
-                        <label htmlFor="floatingPassword"><b>Contraseña</b></label>
-                        <input
-                            type="password"
-                            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                            id="floatingPassword"
-                            placeholder="Ingrese su contraseña"
-                            {...register('password', { required: true })}
-                        />
-                        {errors.password && <div className="invalid-feedback">Este campo es requerido.</div>}
-                    </div>
-                    <div className="row justify-content-center">
-                        <button type="submit" className="btn btn-dark btn-lg mb-3">Ingresar</button>
-                    </div>
-                </form>
+                {/* OPCIONES ADICIONALES */}
+                <section className="button-section">
+                    <label className="checkbox-label-index">
+                        <input type="checkbox" /> Recordarme
+                    </label>
 
-                {/* <div className="buttonFormMain">
-                    <Link to="/UserArea" className="btn btn-dark btn-lg">Visitante</Link>
-                </div> */}
-            </section>
+                    <a href="/ForgotPassword" className="btn btn-dark btn-lg">Olvidaste tu contraseña</a>
+                </section>
 
-            {/* OPCIONES ADICIONALES */}
-            <section className="button-section">
-                <label className="checkbox-label-index">
-                    <input type="checkbox" /> Recordarme
-                </label>
-
-                <a href="/ForgotPassword" className="btn btn-dark btn-lg">Olvidaste tu contraseña</a>
-            </section>
-
-            {/* <div className="divAdmin">
+                {/* <div className="divAdmin">
                 <p>
                     <Link to="/UserAreaConsultant" className="btn btn-dark btn-sm">Admin</Link>
                 </p>
             </div> */}
+            </div>
         </>
     )
 }
