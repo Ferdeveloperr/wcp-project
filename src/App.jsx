@@ -16,6 +16,9 @@ import ReceiveWallet from './components/userAreaConsultant/ReceiveWallet';
 import UserInfo from './components/userArea/UserInfo';
 import Logout from './components/userArea/Logout';
 import AccountConfirmation from './components/userArea/AccountConfirmation';
+import Error403 from './components/errors/Error403'
+import Error404 from './components/errors/Error404'
+import Error500 from './components/errors/Error500'
 
 const App = () => {
   return (
@@ -34,6 +37,9 @@ const App = () => {
         <Route path="/UserInfo" element={<UserInfo />} />
         <Route path="/Logout" element={<Logout />} />
         <Route path="/AccountConfirmation" element={<AccountConfirmation />} />
+        <Route path="/403" element={<Error403 />} />
+        <Route path="/404" element={<Error404 />} />
+        <Route path="/500" element={<Error500 />} />
       </Routes>
     </BrowserRouter>
   );
