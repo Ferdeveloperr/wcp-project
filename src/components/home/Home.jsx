@@ -152,9 +152,9 @@ const Home = () => {
                         </div>
                     </form>
 
-                    <div className="buttonFormMain">
+                    {/* <div className="buttonFormMain">
                         <Link to="/UserArea" className="btn btn-dark btn-lg">Visitante</Link>
-                    </div>
+                    </div> */}
                 </section>
 
                 {/* OPCIONES ADICIONALES */}
