@@ -171,7 +171,7 @@ const UserArea = () => {
                     {/* Agregamos el nav */}
                     <nav className="navbar navbar-expand-lg bg-black border-bottom border-bottom-dark" data-bs-theme="dark">
                         <div className="container-fluid">
-                            <a href="/UserArea" className="Logo">
+                            <a href="/Home" className="Logo">
                                 <img src={LogoFinalWcp} alt="Logo" height="70px" width="70px" />
                             </a>
                             <div className="logoStyle">
@@ -307,19 +307,7 @@ const UserArea = () => {
                                             <p className="mb-1 fs-5">Bonos: Quincenalmente</p>
                                         </div>
                                     </div>
-                                    {/* <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-                                    Cerrar
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-success"
-                                    id="copiarLinkBtn"
-                                    onClick={copiarLink}
-                                >
-                                    Copiar link
-                                </button>
-                            </div> */}
+
                                 </div>
                             </div>
                         </div>
@@ -349,7 +337,7 @@ const UserArea = () => {
 
 
 
-                    {/* SECCION DE TIMER */}
+                    {/* SECCION DE TITULOS ESTATICOS */}
 
 
 

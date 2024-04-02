@@ -148,6 +148,9 @@ const Home = () => {
                         <div className="row justify-content-center">
 
                             <button type="submit" className="btn btn-dark btn-lg mb-3" onClick={(evento) => handleClick(evento, '/UserArea')}>Ingresar</button>
+                            <label className="checkbox-label-index">
+                                <input type="checkbox" /> Recordarme
+                            </label>
 
                         </div>
                     </form>
@@ -159,9 +162,6 @@ const Home = () => {
 
                 {/* OPCIONES ADICIONALES */}
                 <section className="button-section">
-                    <label className="checkbox-label-index">
-                        <input type="checkbox" /> Recordarme
-                    </label>
 
                     <a href="/ForgotPassword" className="btn btn-dark btn-lg">Olvidaste tu contraseña</a>
                 </section>

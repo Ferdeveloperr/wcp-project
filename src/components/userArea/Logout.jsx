@@ -10,10 +10,9 @@ const Logout = () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // Puedes incluir otros headers necesarios, como tokens de autenticación
+
                     },
-                    // Puedes enviar datos adicionales si es necesario
-                    // body: JSON.stringify({ usuarioId: '123' }),
+
                 });
 
                 // Verificar si la solicitud fue exitosa

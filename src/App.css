@@ -13,6 +13,7 @@ body {
 
     margin: 0;
     font-family: 'Inria Serif', serif;
+
 }
 
 
@@ -104,6 +105,7 @@ h1 {
     color: #fff;
     font-weight: 800;
     font-size: 22px;
+    border-radius: 10px;
 }
 
 
@@ -150,7 +152,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 60vh;
+    height: 20vh;
 }
 
 
@@ -160,7 +162,9 @@ h1 {
 }
 
 .checkbox-label-index {
-    margin-bottom: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -193,6 +197,8 @@ input[type="checkbox"] {
 .containerRegistro {
 
     text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
 }
 
 .back-link {
@@ -200,8 +206,10 @@ input[type="checkbox"] {
 }
 
 .form-control {
+
     background-color: #CCC;
     text-align: center;
+
 
 }
 
@@ -487,9 +495,11 @@ video {
 .verifySign {
     display: flex;
     text-align: center;
+    justify-content: center;
     color: red;
-    margin-top: 30px;
     font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    margin: 0 auto;
 }
 
 
@@ -501,8 +511,69 @@ video {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 30vh;
+        height: 15vh;
     }
+
+    .containerCrypto {
+        flex-direction: column;
+        /* Cambia la dirección de flexión a columna en pantallas más pequeñas */
+        align-items: stretch;
+        /* Asegura que los elementos se estiren para llenar el contenedor */
+    }
+
+    .containerCrypto .coin-price {
+        flex-direction: column;
+        text-align: center;
+        /* Centra el texto cuando está en columna */
+        padding: 5px;
+    }
+
+    .containerCrypto .coin-price .log {
+        margin-right: 0;
+        /* Elimina el margen derecho cuando está en columna */
+        margin-bottom: 10px;
+        /* Añade margen inferior para separar el logo del texto */
+    }
+
+    .log img {
+        max-width: 90%;
+        margin-right: 0;
+    }
+
+    .img-responsive {
+        max-width: 50%;
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 5px;
+    }
+
+    .TextCotizacion {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin-top: 200px;
+        font-size: 60px;
+        background: whitesmoke;
+        color: black;
+        border-radius: 35px;
+        width: 80%;
+        margin-left: 10%;
+        margin-bottom: 50px;
+    }
+
+    .sectionCrypto {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
 
     .containerCrypto {
         flex-direction: column;
