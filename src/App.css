@@ -282,6 +282,12 @@ video {
 }
 
 
+.tituloEstatico {
+    display: flex;
+    text-align: center;
+    margin: 25px;
+}
+
 
 /* Estilos hr */
 

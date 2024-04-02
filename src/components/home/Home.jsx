@@ -113,7 +113,7 @@ const Home = () => {
                     </div>
 
                     <div className="mainText">
-                        <p className="mainP">Registrate y obtene tus 10 monedas extra </p>
+                        <p className="mainP">Registrate y comenza a invertir con nosotros! </p>
                     </div>
                 </section>
 
@@ -152,9 +152,9 @@ const Home = () => {
                         </div>
                     </form>
 
-                    {/* <div className="buttonFormMain">
+                    <div className="buttonFormMain">
                         <Link to="/UserArea" className="btn btn-dark btn-lg">Visitante</Link>
-                    </div> */}
+                    </div>
                 </section>
 
                 {/* OPCIONES ADICIONALES */}
@@ -166,11 +166,11 @@ const Home = () => {
                     <a href="/ForgotPassword" className="btn btn-dark btn-lg">Olvidaste tu contraseña</a>
                 </section>
 
-                {/* <div className="divAdmin">
-                <p>
-                    <Link to="/UserAreaConsultant" className="btn btn-dark btn-sm">Admin</Link>
-                </p>
-            </div> */}
+                <div className="divAdmin">
+                    <p>
+                        <Link to="/UserAreaConsultant" className="btn btn-dark btn-sm">Admin</Link>
+                    </p>
+                </div>
             </div>
         </>
     )

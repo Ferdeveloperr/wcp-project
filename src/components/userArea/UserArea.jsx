@@ -38,7 +38,7 @@ const UserArea = () => {
 
     // FUNCION PARA QUE EL USUARIO COPIE EL LINK DE LA WALLET DEL WXP
     const copiarLink = () => {
-        const url = '0x3129bdddaa67f1c0430e525cccc4f9ee8b8ca898';
+        const url = '1234556789abcd1234';
 
         navigator.clipboard.writeText(url)
             .then(() => {
@@ -250,7 +250,7 @@ const UserArea = () => {
 
                     <section>
                         <div className="user-area">
-                            <h4 className="tittleUserArea">Ingrese la cantidad de monedas que utilizará para ver sus ganancias</h4>
+                            <h4 className="tittleUserArea">Ingrese la cantidad de monedas que utilizará para su inversion</h4>
                             <div className="form-floating mb-3 d-flex flex-column align-items-center">
                                 <label htmlFor="floatingNumberr"></label>
                                 <input
@@ -330,7 +330,7 @@ const UserArea = () => {
                     <section className='UserAreaSectionText'>
 
                         <br></br>
-                        <h4 className="tittleUserArea">Ingrese ID de transaccion</h4>
+                        <h4 className="tittleUserArea">Ingrese ID de su transaccion</h4>
                         <div className="form-floating mb-3 d-flex flex-column align-items-center">
                             <label htmlFor="floatingNumberr"></label>
                             <input type="text" className="form-control" id="transaccionId"
@@ -353,20 +353,18 @@ const UserArea = () => {
 
 
 
-                    <div className='timerEstatico'>
+                    <div >
                         <h2 className='tituloEstatico'>
                             Tiempo estimado de procesamiento
                         </h2>
 
 
 
-                        <h5>
-                            El tiempo estimado que demora su transaccion sera de 3 a 5 dias habiles
+                        <h5 className='tituloEstatico'>
+                            El tiempo estimado que demora en acreditarse su transaccion es de 24 a 48hs hábiles
                         </h5>
 
-                        <br />
 
-                        <h6>Tenga en cuenta que si no se registra Operacion realizada el tiempo estimado queda sin efecto</h6>
                     </div>
 
 
